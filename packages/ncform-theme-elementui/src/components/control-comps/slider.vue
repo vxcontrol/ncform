@@ -1,19 +1,15 @@
 <template>
-  <div style="float:left;">
-      <el-slider
-        :disabled="disabled || readonly"
-        :placeholder="placeholder"
-        v-show="!hidden"
-        v-model="modelVal"
-        :min="mergeConfig.min"
-        :max="mergeConfig.max"
-        :step="mergeConfig.step"
-      ></el-slider>
+  <div v-show="!hidden" class="ncform-slider" style="float: left;">
+    <el-slider
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :placeholder="placeholder"
+      :min="mergeConfig.min"
+      :max="mergeConfig.max"
+      :step="mergeConfig.step"
+    ></el-slider>
   </div>
 </template>
-
-<style lang="scss" scoped>
-</style>
 
 <script>
 

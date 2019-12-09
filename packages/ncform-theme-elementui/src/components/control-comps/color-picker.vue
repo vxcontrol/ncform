@@ -1,12 +1,28 @@
 <template>
-  <el-color-picker
-    v-model="modelVal"
-    :disabled="disabled || readonly"
-    v-show="!hidden"
-  ></el-color-picker>
+  <div v-show="!hidden" class="ncform-color-picker">
+    <div
+      v-if="globalStatus === 'preview'"
+      class="ncform-color-picker-preview"
+      :style="{ borderColor: modelVal }"
+    >
+      {{modelVal}}
+    </div>
+    <el-color-picker
+      v-else
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+    ></el-color-picker>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+  .ncform-color-picker-preview {
+    margin: 8px 0;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #606266;
+    border-left: solid 2px;
+  }
 </style>
 
 <script>
