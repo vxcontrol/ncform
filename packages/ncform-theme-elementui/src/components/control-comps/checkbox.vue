@@ -1,7 +1,7 @@
 <template>
   <div
     class="ncform-checkbox"
-    :style="{display: hidden ? 'none' : ''}"
+    v-show="!hidden"
   >
     <el-checkbox
       v-if="mergeConfig.selectAll && !readonly"

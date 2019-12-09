@@ -1,5 +1,5 @@
 <template>
-  <div class="ncform-input">
+  <div v-show="!hidden" class="ncform-input">
     <!-- 没有自动补全 -->
     <el-input
       v-if="!mergeConfig.autocomplete"
@@ -7,7 +7,6 @@
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
@@ -90,7 +89,6 @@
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :size="mergeConfig.size"
       :type="mergeConfig.type"
