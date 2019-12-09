@@ -50,18 +50,18 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 1.install
 ```
-npm i @ncform/ncform @ncform/ncform-common --save
-npm i @ncform/ncform-theme-elementui element-ui axios --save 
+npm i @vxcontrol/ncform @vxcontrol/ncform-common --save
+npm i @vxcontrol/ncform-theme-elementui element-ui axios --save 
 ```
 
 2.import
 ```
 import Vue from 'vue';
-import vueNcform from '@ncform/ncform';
+import vueNcform from '@vxcontrol/ncform';
 
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import ncformStdComps from '@ncform/ncform-theme-elementui';
+import ncformStdComps from '@vxcontrol/ncform-theme-elementui';
 import axios from 'axios';
 
 Vue.use(Element);
@@ -126,11 +126,11 @@ export default {
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform/dist/vueNcform.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps });
@@ -308,7 +308,7 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
 
-你也可以尝试这个第三方的生成器: [ncform-maker](https://f-loat.github.io/ncform-maker/)
+你也可以尝试这个第三方的生成器: [ncform-maker](https://vxcontrol.github.io/ncform-maker/)
 
 ## 参考项目
 

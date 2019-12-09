@@ -1,4 +1,4 @@
-import { ValidationRule } from "@ncform/ncform-common";
+import { ValidationRule } from "@vxcontrol/ncform-common";
 
 class EmailRule extends ValidationRule {
   constructor(props) {

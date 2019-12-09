@@ -105,7 +105,7 @@
 <script>
 import "./layout-comps";
 import "./control-comps";
-import ncformCommon from '@ncform/ncform-common';
+import ncformCommon from '@vxcontrol/ncform-common';
 import _get from "lodash-es/get";
 import _isArray from "lodash-es/isArray";
 

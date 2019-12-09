@@ -1,4 +1,4 @@
-import { ncformUtils } from "@ncform/ncform-common";
+import { ncformUtils } from "@vxcontrol/ncform-common";
 import _get from "lodash-es/get";
 import _cloneDeep from "lodash-es/cloneDeep";
 import allRules from "./rules/index";

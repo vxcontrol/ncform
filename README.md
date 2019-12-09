@@ -50,18 +50,18 @@ Experience the charm of ncform on the [Playground](https://ncform.github.io/ncfo
 
 1.install
 ```
-npm i @ncform/ncform @ncform/ncform-common --save
-npm i @ncform/ncform-theme-elementui element-ui axios --save 
+npm i @vxcontrol/ncform @vxcontrol/ncform-common --save
+npm i @vxcontrol/ncform-theme-elementui element-ui axios --save 
 ```
 
 2.import
 ```
 import Vue from 'vue';
-import vueNcform from '@ncform/ncform';
+import vueNcform from '@vxcontrol/ncform';
 
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import ncformStdComps from '@ncform/ncform-theme-elementui';
+import ncformStdComps from '@vxcontrol/ncform-theme-elementui';
 import axios from 'axios';
 
 Vue.use(Element);
@@ -126,11 +126,11 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform/dist/vueNcform.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@vxcontrol/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });
@@ -307,7 +307,7 @@ Thought: "Throw in" the standard components of various themes into the ncform co
 
 You can accelerate the speed of writing form schemas with [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)
 
-Also you can try the third-party generator: [ncform-maker](https://f-loat.github.io/ncform-maker/)
+Also you can try the third-party generator: [ncform-maker](https://vxcontrol.github.io/ncform-maker/)
 
 ## References
 

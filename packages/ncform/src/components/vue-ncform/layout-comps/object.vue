@@ -95,7 +95,7 @@
 
 <script>
 
-  import ncformCommon from '@ncform/ncform-common';
+  import ncformCommon from '@vxcontrol/ncform-common';
 
   const layoutObjectMixin = ncformCommon.mixins.vue.layoutObjectMixin;
 

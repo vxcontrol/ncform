@@ -77,7 +77,7 @@
 <script>
 
   import _map from 'lodash-es/map';
-  import ncformCommon from '@ncform/ncform-common';
+  import ncformCommon from '@vxcontrol/ncform-common';
 
   const ncformUtils = ncformCommon.ncformUtils;
   const layoutArrayMixin = ncformCommon.mixins.vue.layoutArrayMixin;
