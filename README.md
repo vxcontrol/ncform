@@ -50,18 +50,18 @@ Experience the charm of ncform on the [Playground](https://ncform.github.io/ncfo
 
 1.install
 ```
-npm i @ncform/ncform @ncform/ncform-common --save
-npm i @ncform/ncform-theme-elementui element-ui axios --save 
+npm i @f-loat/ncform @f-loat/ncform-common --save
+npm i @f-loat/ncform-theme-elementui element-ui axios --save 
 ```
 
 2.import
 ```
 import Vue from 'vue';
-import vueNcform from '@ncform/ncform';
+import vueNcform from '@f-loat/ncform';
 
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import ncformStdComps from '@ncform/ncform-theme-elementui';
+import ncformStdComps from '@f-loat/ncform-theme-elementui';
 import axios from 'axios';
 
 Vue.use(Element);
@@ -126,11 +126,11 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@f-loat/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@f-loat/ncform/dist/vueNcform.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@f-loat/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });

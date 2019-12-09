@@ -131,8 +131,8 @@ function genNcformThemeElementuiDoc() {
   [
     "lodash/lodash.min.js",
     "axios/dist/axios.min.js",
-    "@ncform/ncform-common/dist/ncformCommon.min.js",
-    "@ncform/ncform/dist/vueNcform.min.js",
+    "@f-loat/ncform-common/dist/ncformCommon.min.js",
+    "@f-loat/ncform/dist/vueNcform.min.js",
     "element-ui/lib/theme-chalk/index.css"
   ].forEach(item => {
     const fileName = path.basename(item);

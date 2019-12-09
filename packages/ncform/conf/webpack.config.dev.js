@@ -32,10 +32,10 @@ module.exports = {
       commonjs: "axios",
       amd: "axios"
     },
-    "@ncform/ncform-common": {
+    "@f-loat/ncform-common": {
       root: "ncformCommon",
-      commonjs2: "@ncform/ncform-common",
-      commonjs: "@ncform/ncform-common",
+      commonjs2: "@f-loat/ncform-common",
+      commonjs: "@f-loat/ncform-common",
       amd: "ncformCommon"
     }
   },

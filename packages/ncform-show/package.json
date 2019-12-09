@@ -55,9 +55,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ncform/ncform": "^1.6.9",
-    "@ncform/ncform-common": "^1.6.9",
-    "@ncform/ncform-theme-elementui": "^1.6.9",
+    "@f-loat/ncform": "^1.6.9",
+    "@f-loat/ncform-common": "^1.6.9",
+    "@f-loat/ncform-theme-elementui": "^1.6.9",
     "ace-builds": "^1.2.9",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"
