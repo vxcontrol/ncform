@@ -10,6 +10,7 @@
     <el-color-picker
       v-else
       v-model="modelVal"
+      v-bind="mergeConfig"
       :disabled="disabled || readonly"
     ></el-color-picker>
   </div>

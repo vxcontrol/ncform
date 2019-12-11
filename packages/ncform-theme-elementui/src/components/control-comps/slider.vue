@@ -4,9 +4,7 @@
       v-model="modelVal"
       :disabled="disabled || readonly"
       :placeholder="placeholder"
-      :min="mergeConfig.min"
-      :max="mergeConfig.max"
-      :step="mergeConfig.step"
+      v-bind="mergeConfig"
     ></el-slider>
   </div>
 </template>

@@ -40,23 +40,14 @@
       ref="upload"
       :class="[readonly ? 'is-read-only' : '']"
       :disabled="readonly || disabled"
-      :action="mergeConfig.uploadUrl"
-      :multiple="mergeConfig.multiple"
-      :data="mergeConfig.data"
+      v-bind="mergeConfig"
       :show-file-list="showFileList"
-      :drag="mergeConfig.drag"
-      :accept="mergeConfig.accept"
-      :list-type="mergeConfig.listType"
-      :auto-upload="mergeConfig.autoUpload"
-      :limit="mergeConfig.limit"
       :on-change="handleUploadChange"
       :on-success="handleUploadSucess"
       :on-error="handleUploadError"
       :on-exceed="handleUploadExceed"
       :on-remove="handleUploadRemove"
       :file-list="fileList"
-      :name="mergeConfig.fileField"
-      :headers="mergeConfig.headers"
     >
       <!-- 1. 可拖拽 -->
       <template v-if="!readonly && mergeConfig.drag" slot="trigger">
@@ -196,7 +187,7 @@
       return {
         // 组件特有的配置属性
         defaultConfig: {
-          uploadUrl: '', // 上传的地址
+          action: '', // 上传的地址
           multiple: false, // 是否支持多选
           data: {}, // 上传时附带的额外参数
           showFileList: true, // 是否显示已上传文件列表
@@ -215,7 +206,7 @@
           resField: '', // 获取返回结果的字段,
           fileNameField: 'name',
           fileUrlField: 'url',
-          fileField: 'file',
+          name: 'file',
           headers: {}
         },
         uploadInfo: {

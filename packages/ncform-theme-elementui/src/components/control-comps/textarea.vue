@@ -5,12 +5,11 @@
       v-else
       v-show="!hidden"
       v-model="inputVal"
+      v-bind="mergeConfig"
       type="textarea"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      :rows="mergeConfig.rows"
-      :autosize="mergeConfig.autoSize"
       @blur="onBlur"
     ></el-input>
   </div>

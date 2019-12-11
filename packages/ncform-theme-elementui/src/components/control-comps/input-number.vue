@@ -7,10 +7,7 @@
       v-else
       v-model="modelVal"
       :disabled="disabled || readonly"
-      :min="mergeConfig.min"
-      :max="mergeConfig.max"
-      :step="mergeConfig.step"
-      :size="mergeConfig.size"
+      v-bind="mergeConfig"
     ></el-input-number>
   </div>
 </template>
@@ -22,6 +19,9 @@
         clear: none;
       }
     }
+    .el-input-number {
+      width: 100%;
+    }
   }
 
   .v-layout {
@@ -29,6 +29,9 @@
       &.__ncform-control {
         clear: both;
       }
+    }
+    .el-input-number {
+      width: 100%;
     }
   }
 
