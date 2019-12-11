@@ -21,7 +21,7 @@
     "json-schema",
     "ncform"
   ],
-  "author": "daniel.xiao",
+  "author": "daniel.xiao; F-loat",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",

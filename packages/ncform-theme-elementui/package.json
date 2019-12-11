@@ -2,7 +2,7 @@
   "name": "@f-loat/ncform-theme-elementui",
   "version": "1.7.0",
   "description": "ncform theme element-ui",
-  "author": "daniel.xiao; kyle.lo;",
+  "author": "daniel.xiao; kyle.lo; F-loat",
   "main": "dist/ncformStdComps.min.js",
   "keywords": [
     "ncform",
