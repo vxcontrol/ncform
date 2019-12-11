@@ -3,15 +3,7 @@
     <el-switch
       v-model="modelVal"
       :disabled="disabled || readonly"
-      :width="mergeConfig.width"
-      :active-icon-class="mergeConfig.activeIconClass"
-      :inactive-icon-class="mergeConfig.inactiveIconClass"
-      :active-text="mergeConfig.activeText"
-      :inactive-text="mergeConfig.inactiveText"
-      :active-value="mergeConfig.activeValue"
-      :inactive-value="mergeConfig.inactiveValue"
-      :active-color="mergeConfig.activeColor"
-      :inactive-color="mergeConfig.inactiveColor"
+      v-bind="mergeConfig"
     ></el-switch>
   </div>
 </template>
