@@ -8,10 +8,9 @@
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="el-row v-layout" style="width: 100%">
 
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
 
         <template>
@@ -20,9 +19,9 @@
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
               {{_analyzeVal(fieldSchema.ui.label)}}
               <!-- 提示信息 -->
-              <el-tooltip class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
+              <el-tooltip v-if="fieldSchema.ui.help.show === true" class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
                 <div slot="content" v-html="fieldSchema.ui.help.content"></div>
-                <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+                <a class="help" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
               </el-tooltip>
             </label>
 
@@ -41,10 +40,9 @@
 
     <!-- 水平布局，即label左，control右 -->
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
           <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
@@ -170,6 +168,21 @@ export default {
     showLegend: {
       type: Boolean,
       default: true
+    }
+  },
+  computed: {
+    filteredPropreties() {
+      const { properties } = this.schema
+      return Object.keys(properties).reduce((result, curkey) => {
+        const curval = properties[curkey]
+        const hidden = this._analyzeVal(curval.ui.hidden)
+
+        if (!hidden) {
+          result[curkey] = curval
+        }
+
+        return result
+      }, {})
     }
   },
   methods: {
