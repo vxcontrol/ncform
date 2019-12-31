@@ -4,10 +4,9 @@
 
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="form-row v-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['col-md-' + (fieldSchema.ui.columns || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group">
         <template>
             <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
@@ -32,10 +31,9 @@
 
     <!-- 水平布局，即label左，control右 -->
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="form-row h-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['col-md-' + (fieldSchema.ui.columns || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group row">
         <template>
           <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
@@ -106,6 +104,21 @@
         type: Boolean,
         default: true
       },
+    },
+    computed: {
+      filteredPropreties() {
+        const { properties } = this.schema
+        return Object.keys(properties).reduce((result, curkey) => {
+          const curval = properties[curkey]
+          const hidden = this._analyzeVal(curval.ui.hidden)
+
+          if (!hidden) {
+            result[curkey] = curval
+          }
+
+          return result
+        }, {})
+      }
     },
     methods: {
       legendEnable(fieldSchema) {
