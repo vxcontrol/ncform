@@ -1,6 +1,6 @@
 {
   "name": "@f-loat/ncform",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "ncform, a very nice configuration generation way to develop form ( vue, json-schema, form, generator )",
   "author": "daniel.xiao; F-loat",
   "main": "dist/vueNcform.min.js",
