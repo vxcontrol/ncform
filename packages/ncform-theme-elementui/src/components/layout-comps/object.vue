@@ -11,6 +11,7 @@
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
+          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
 
         <template>
@@ -43,6 +44,7 @@
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
+          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
           <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
@@ -175,9 +177,9 @@ export default {
       const { properties } = this.schema
       return Object.keys(properties).reduce((result, curkey) => {
         const curval = properties[curkey]
-        const hidden = this._analyzeVal(curval.ui.hidden)
+        const remove = this._analyzeVal(curval.ui.remove)
 
-        if (!hidden) {
+        if (!remove) {
           result[curkey] = curval
         }
 
