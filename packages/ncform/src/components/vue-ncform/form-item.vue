@@ -3,7 +3,7 @@
   <div :class="[(!!schema.__validationResult && !schema.__validationResult.result) ? 'invalid' : '', schema.ui.itemClass]">
 
     <!-- object 类型 -->
-    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" v-bind="commonAttrs">
+    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :paths="paths" v-bind="commonAttrs">
 
       <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
         <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="`${formName}-${fieldName}`" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
@@ -12,7 +12,7 @@
     </component>
 
     <!-- array 类型 -->
-    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" v-bind="commonAttrs" class="__ncform-control">
+    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :paths="paths" v-bind="commonAttrs" class="__ncform-control">
 
       <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
         <form-item :schema="props.schema" :key="`${formName}-${fieldName}`" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']'" :form-name="formName"></form-item>

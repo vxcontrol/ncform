@@ -161,6 +161,7 @@
 
 <script>
 import ncformCommon from '@f-loat/ncform-common';
+import _set from "lodash-es/set";
 
 const ncformUtils = ncformCommon.ncformUtils;
 const layoutObjectMixin = ncformCommon.mixins.vue.layoutObjectMixin;
@@ -174,12 +175,16 @@ export default {
   },
   computed: {
     filteredPropreties() {
+      const { paths } = this
       const { properties } = this.schema
       return Object.keys(properties).reduce((result, curkey) => {
         const curval = properties[curkey]
         const remove = this._analyzeVal(curval.ui.remove)
 
-        if (!remove) {
+        if (remove) {
+          const fullkey = paths ? paths + '.' + curkey : curkey
+          _set(this.formData, fullkey, undefined)
+        } else {
           result[curkey] = curval
         }
 
