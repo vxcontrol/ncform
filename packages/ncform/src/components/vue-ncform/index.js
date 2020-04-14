@@ -80,7 +80,7 @@ module.exports = {
       });
     };
 
-    Vue.prototype.$ncformReset = formName => {
+    Vue.prototype.$ncformReset = (formName, formVal) => {
       formName = formName || "_ncformDefaultName";
       const vm = window.__$ncform.__ncFormsGlobalList[formName];
 
@@ -88,7 +88,7 @@ module.exports = {
         return;
       }
 
-      return vm.reset();
+      vm.reset(formVal);
     };
 
     Vue.prototype.$ncformAddWidget = ({ name, widget }) => {
