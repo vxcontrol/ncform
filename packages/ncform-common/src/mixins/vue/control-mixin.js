@@ -59,6 +59,13 @@ export default {
 
     value: {
       type: [String, Number, Boolean, Object, Array]
+    },
+  
+    schema: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
 
@@ -75,13 +82,23 @@ export default {
       return this.globalStatus === 'preview' || this._analyzeVal(this.config.disabled);
     },
     readonly() {
-      return this._analyzeVal(this.config.readonly);
+      if (!this.schema || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+        return this._analyzeVal(this.config.readonly)
+      } else {
+        if (this.schema.ui.process === this.globalConst.nodeUId) {
+          return this._analyzeVal(this.config.readonly)
+        }
+        return true
+      }
     },
     placeholder() {
       return this._analyzeVal(this.config.placeholder);
     },
     hidden() {
-      return this._analyzeVal(this.config.hidden);
+      if (!this.schema || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+        return this._analyzeVal(this.config.hidden);
+      }
+      return !(this.globalConst.nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId);
     },
     mergeConfig() {
       let newConfig = extend(

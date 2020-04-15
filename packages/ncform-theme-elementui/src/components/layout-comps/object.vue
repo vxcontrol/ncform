@@ -11,7 +11,7 @@
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+          :style="{display: hidden(fieldSchema) ? 'none' : ''}"
           class="el-col el-form-item">
 
         <template>
@@ -44,7 +44,7 @@
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+          :style="{display: hidden(fieldSchema) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
           <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
@@ -195,7 +195,13 @@ export default {
   methods: {
     legendEnable(fieldSchema) {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
-    }
+    },
+    hidden(fieldSchema) {
+      if (!fieldSchema || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined) {
+        return this._analyzeVal(fieldSchema.ui.hidden);
+      }
+      return !(this.globalConst.nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId);
+    },
   },
   mixins: [layoutObjectMixin]
 };
