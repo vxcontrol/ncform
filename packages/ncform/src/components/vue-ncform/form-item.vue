@@ -32,7 +32,7 @@
 
     <!-- string / number / integer / boolean 类型 -->
     <template v-else>
-      <component :is="'ncform-' + schema.ui.widget" v-model="schema.value" v-bind="commonAttrs" class="__ncform-control">
+      <component :is="'ncform-' + schema.ui.widget" v-model="schema.value" v-bind="commonAttrs" :schema="schema" class="__ncform-control">
       </component>
       <div class="__ncform-item-preview" v-if="schema.ui.preview && schema.value"
         :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}" >
