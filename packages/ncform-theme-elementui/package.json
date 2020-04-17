@@ -1,6 +1,6 @@
 {
   "name": "@f-loat/ncform-theme-elementui",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "ncform theme element-ui",
   "author": "daniel.xiao; kyle.lo; F-loat",
   "main": "dist/ncformStdComps.min.js",
@@ -10,7 +10,7 @@
     "element-ui"
   ],
   "devDependencies": {
-    "@f-loat/ncform": "^1.8.1",
+    "@f-loat/ncform": "^1.8.2",
     "autoprefixer": "^6.0.2",
     "axios": "^0.17.1",
     "babel-core": "^6.26.3",
@@ -61,7 +61,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@f-loat/ncform-common": "^1.8.1",
+    "@f-loat/ncform-common": "^1.8.2",
     "element-ui": "^2.13.0",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"
