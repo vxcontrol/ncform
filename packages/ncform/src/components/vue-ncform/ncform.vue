@@ -155,6 +155,13 @@ export default {
     };
   },
 
+  provide () {
+    return {
+      ncEmit: this.$emit,
+      ncReset: this.reset
+    }
+  },
+
   /* ====================== 事件处理 ====================== */
 
   methods: {
