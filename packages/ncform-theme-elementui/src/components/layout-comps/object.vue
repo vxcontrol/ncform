@@ -200,7 +200,8 @@ export default {
       if (!fieldSchema || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined) {
         return this._analyzeVal(fieldSchema.ui.hidden);
       }
-      return !(this.globalConst.nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId);
+      let nodeCodeArr = this.globalConst.nodeCodeArr || []
+      return !(nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId);
     },
   },
   mixins: [layoutObjectMixin]

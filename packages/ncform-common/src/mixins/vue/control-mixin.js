@@ -82,10 +82,10 @@ export default {
       return this.globalStatus === 'preview' || this._analyzeVal(this.config.disabled);
     },
     readonly() {
-      if (!this.schema || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+      if (!this.schema || !this.schema.ui || this.schema.ui.process === true || this.schema.ui.process === undefined) {
         return this._analyzeVal(this.config.readonly)
       } else {
-        if (this.schema.ui.process === this.globalConst.nodeUId) {
+        if (this.schema && this.schema.ui && this.schema.ui.process === this.globalConst.nodeUId) {
           return this._analyzeVal(this.config.readonly)
         }
         return true
@@ -95,10 +95,11 @@ export default {
       return this._analyzeVal(this.config.placeholder);
     },
     hidden() {
-      if (!this.schema || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+      if (!this.schema || !this.schema.ui || this.schema.ui.process === true || this.schema.ui.process === undefined) {
         return this._analyzeVal(this.config.hidden);
       }
-      return !(this.globalConst.nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId);
+      let nodeCodeArr = this.globalConst.nodeCodeArr || []
+      return !(nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId);
     },
     mergeConfig() {
       let newConfig = extend(
