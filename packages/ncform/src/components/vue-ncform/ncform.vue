@@ -157,8 +157,8 @@ export default {
 
   provide () {
     return {
-      ncEmit: this.$emit,
-      ncReset: this.reset
+      ncEmit: (...args) => this.$emit(...args),
+      ncReset: (...args) => this.reset(...args)
     }
   },
 
