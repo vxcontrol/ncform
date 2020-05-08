@@ -210,14 +210,20 @@ export default {
       if (
         _get(this.dataFormSchema, 'globalConfig.ignoreRulesWhenHidden', true)
       ) {
-        // 如果开启了忽略隐藏字段规则
-        const isHidden = ncformUtils.smartAnalyzeVal(schema.ui.hidden, {
-          idxChain: __idxChain,
-          data: {
-            rootData: this.$data.formData,
-            constData: this.dataFormSchema.globalConfig.constants
-          }
-        });
+        let isHidden = false
+        if (!schema || schema.ui.process === true || schema.ui.process === undefined) {
+          // 如果开启了忽略隐藏字段规则
+          isHidden = ncformUtils.smartAnalyzeVal(schema.ui.hidden, {
+            idxChain: __idxChain,
+            data: {
+              rootData: this.$data.formData,
+              constData: this.dataFormSchema.globalConfig.constants
+            }
+          });
+        } else {
+          let { constants } = this.dataFormSchema.globalConfig
+          isHidden = !(constants.nodeCodeArr.includes(schema.ui.process) || schema.ui.process === constants.nodeUId);
+        }
         // 如果是隐藏，则忽略校验规则
         if (isHidden)
           return Promise.resolve({ result: true, __path, __dataPath });
