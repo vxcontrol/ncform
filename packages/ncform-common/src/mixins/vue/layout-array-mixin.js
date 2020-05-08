@@ -97,7 +97,14 @@ export default {
 
   computed: {
     disabled() {
-      return this._analyzeVal(this.config.disabled);
+      if (!this.schema || !this.schema.ui || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+        return this._analyzeVal(this.config.disabled);
+      } else {
+        if (this.schema && this.schema.ui && this.schema.ui.process === this.globalConst.nodeUId) {
+          return this._analyzeVal(this.config.disabled);
+        }
+        return true
+      }
     },
     mergeConfig() {
       let newConfig = extend(
