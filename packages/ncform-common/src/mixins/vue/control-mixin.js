@@ -99,7 +99,11 @@ export default {
         return this._analyzeVal(this.config.hidden);
       }
       let nodeCodeArr = this.globalConst.nodeCodeArr || []
-      return !(nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId);
+      if ((nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId)) {
+        return this._analyzeVal(this.config.hidden)
+      } else {
+        return true
+      }
     },
     mergeConfig() {
       let newConfig = extend(
