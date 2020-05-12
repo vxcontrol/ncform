@@ -197,11 +197,15 @@ export default {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     },
     hidden(fieldSchema) {
-      if (!fieldSchema || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined) {
+      if (fieldSchema || !fieldSchema.ui || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined) {
         return this._analyzeVal(fieldSchema.ui.hidden);
       }
       let nodeCodeArr = this.globalConst.nodeCodeArr || []
-      return !(nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId);
+      if ((nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId)) {
+        return this._analyzeVal(fieldSchema.ui.hidden)
+      } else {
+        return true
+      }
     },
   },
   mixins: [layoutObjectMixin]
