@@ -197,7 +197,7 @@ export default {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     },
     hidden(fieldSchema) {
-      if (fieldSchema || !fieldSchema.ui || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined) {
+      if ( !fieldSchema || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined ) {
         return this._analyzeVal(fieldSchema.ui.hidden);
       }
       let nodeCodeArr = this.globalConst.nodeCodeArr || []
