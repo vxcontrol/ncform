@@ -1,8 +1,8 @@
 {
   "name": "@vxcontrol/ncform-theme-elementui",
-  "version": "1.7.0",
+  "version": "1.7.3",
   "description": "ncform theme element-ui",
-  "author": "daniel.xiao; kyle.lo; F-loat",
+  "author": "daniel.xiao; kyle.lo; F-loat; vxcontrol",
   "main": "dist/ncformStdComps.min.js",
   "keywords": [
     "ncform",
@@ -10,9 +10,9 @@
     "element-ui"
   ],
   "devDependencies": {
-    "@vxcontrol/ncform": "^1.7.0",
+    "@vxcontrol/ncform": "^1.7.3",
     "autoprefixer": "^6.0.2",
-    "axios": "^0.17.1",
+    "axios": "^0.19.2",
     "babel-core": "^6.26.3",
     "babel-eslint": "^6.0.4",
     "babel-plugin-transform-runtime": "^6.3.13",
@@ -61,10 +61,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@vxcontrol/ncform-common": "^1.7.0",
-    "element-ui": "^2.0.7",
-    "lodash-es": "^4.16.2",
-    "vue": "^2.1.8"
+    "@vxcontrol/ncform-common": "^1.7.3",
+    "element-ui": "^2.13.2",
+    "lodash-es": "^4.17.15",
+    "vue": "^2.6.11"
   },
   "publishConfig": {
     "access": "public"
