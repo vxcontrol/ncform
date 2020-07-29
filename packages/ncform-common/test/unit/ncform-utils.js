@@ -8,20 +8,29 @@ describe('/src/ncform-utils.js', () => {
   it("perfectFormSchema - Data format check", () => {
     // not a valid json string
     let formSchema = "{a: 1}";
-    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema must be a valid json format/);
+    assert.throws(
+      ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema),
+      /fromSchema must be a valid json format/
+    );
 
     // not array
     formSchema = [];
-    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema must be a json object/);
+    assert.throws(
+      ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema),
+      /fromSchema must be a json object/
+    );
 
     // root node's type is not 'object'
     formSchema = {
       type: 'array'
     };
-    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema' root field type must be object/);
+    assert.throws(
+      ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema),
+      /fromSchema' root field type must be object/
+    );
   });
   it("perfectFormSchema - Implicit widget and widgetConfig", () => {
-    let formSchema = {
+    const formSchema = {
       type: 'object',
       properties: {
         name: {
@@ -45,7 +54,7 @@ describe('/src/ncform-utils.js', () => {
         }
       }
     };
-    let newFormSchema = ncformUtils.perfectFormSchema(formSchema);
+    const newFormSchema = ncformUtils.perfectFormSchema(formSchema);
     assert.equal(newFormSchema.ui.widget, 'object');
     assert.equal(newFormSchema.properties.hobbies.ui.widget, 'array');
     assert.equal(newFormSchema.properties.name.ui.widget, 'input');
@@ -60,7 +69,7 @@ describe('/src/ncform-utils.js', () => {
     assert.equal(newFormSchema.properties.audit.ui.widget, 'radio');
   });
   it("perfectFormSchema - Other fields", () => {
-    let formSchema = {
+    const formSchema = {
       type: 'object',
       properties: {
         name: {
@@ -74,7 +83,7 @@ describe('/src/ncform-utils.js', () => {
         }
       }
     };
-    let newFormSchema = ncformUtils.perfectFormSchema(formSchema);
+    const newFormSchema = ncformUtils.perfectFormSchema(formSchema);
     assert.equal(newFormSchema.ui.showLabel, true);
     assert.equal(newFormSchema.ui.showLegend, true);
     assert.equal(newFormSchema.ui.noLabelSpace, false);
@@ -87,13 +96,14 @@ describe('/src/ncform-utils.js', () => {
       constants: {},
       status: "edit",
       updateWait: 1000,
-      scrollToFailField: { // Automatically scroll to fields that failed validation
+      scrollToFailField: {
+        // Automatically scroll to fields that failed validation
         enabled: true, // enable this feature or not
         container: 'body',
         duration: 500, // The duration (in milliseconds) of the scrolling animation
-        offset: -80, // The offset that should be applied when scrolling.
+        offset: -80 // The offset that should be applied when scrolling.
       }
-    })
+    });
     assert.equal(newFormSchema.properties.name.ui.label, 'name');
     assert.equal(newFormSchema.properties.name.ui.showLabel, true);
     assert.equal(newFormSchema.properties.name.ui.noLabelSpace, false);
@@ -245,9 +255,7 @@ describe('/src/ncform-utils.js', () => {
             type: 'string',
             default: 'hi'
           },
-          default: [
-            'hi', 'daniel'
-          ]
+          default: ['hi', 'daniel']
         }
       }
     };
@@ -306,7 +314,7 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     const result = ncformUtils.getModelFromSchema(formSchema);
-    assert(JSON.stringify(result) === JSON.stringify({user: 'daniel'}));
+    assert(JSON.stringify(result) === JSON.stringify({ user: 'daniel' }));
   });
 
   // --- setValueToSchema
@@ -403,7 +411,10 @@ describe('/src/ncform-utils.js', () => {
     };
     ncformUtils.setValueToSchema(value, formSchema);
     console.log(JSON.stringify(formSchema, null, 2));
-    assert(JSON.stringify(formSchema.properties.user.value) === JSON.stringify(value.user));
+    assert(
+      JSON.stringify(formSchema.properties.user.value) ===
+        JSON.stringify(value.user)
+    );
   });
   it("setValueToSchema - ordinary array", () => {
     const value = ['daniel', 'sarah'];
@@ -766,22 +777,30 @@ describe('/src/ncform-utils.js', () => {
   });
 
   it("smartAnalyzeVal - function value array item", () => {
-    let rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
-    let sayHi = 'hi';
+    let rootData = { users: [{ name: 'daniel' }, { name: 'sarah' }] };
+    const sayHi = 'hi';
 
     let val = function(formData, constData, selfData, tempData, itemIdxChain) {
       return `${sayHi} ${formData.users[itemIdxChain[0]].name}` === 'hi sarah';
     };
-    let result = ncformUtils.smartAnalyzeVal(val, { idxChain: '1', data: { rootData } });
+    let result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '1',
+      data: { rootData }
+    });
     assert(result === true);
 
-    rootData = { users: [ { address: [ { name: 'beijing' }, { name: 'shanghai' } ] } ] };
+    rootData = {
+      users: [{ address: [{ name: 'beijing' }, { name: 'shanghai' }] }]
+    };
 
     val = function(formData, constData, selfData, tempData, itemIdxChain) {
-      const [ i, j ] = itemIdxChain;
+      const [i, j] = itemIdxChain;
       return `${sayHi} ${formData.users[i].address[j].name}` === 'hi shanghai';
     };
-    result = ncformUtils.smartAnalyzeVal(val, { idxChain: '0,1', data: { rootData } });
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '0,1',
+      data: { rootData }
+    });
     assert(result === true);
   });
 
@@ -1107,47 +1126,42 @@ describe('/src/ncform-utils.js', () => {
   it("traverseJSON", () => {
     let json = { a: 1, b: null };
     let result = ncformUtils.traverseJSON(json, (key, val) => {
-      if (val !== null && typeof val !== 'object')
-        return val + 1;
-      else return val;
+      if (val !== null && typeof val !== "object") return val + 1;
+      return val;
     });
-    assert(result.a === 2)
-    assert(result.b === null)
+    assert(result.a === 2);
+    assert(result.b === null);
 
     json = { a: { b: 1, c: { d: 2 } } };
     result = ncformUtils.traverseJSON(json, (key, val) => {
-      if (val !== null && typeof val !== 'object')
-        return val + 1;
-      else return val;
+      if (val !== null && typeof val !== "object") return val + 1;
+      return val;
     });
-    assert(result.a.b === 2)
-    assert(result.a.c.d === 3)
+    assert(result.a.b === 2);
+    assert(result.a.c.d === 3);
 
     json = { a: [1, [2]] };
     result = ncformUtils.traverseJSON(json, (key, val) => {
-      if (val !== null && typeof val !== 'object')
-        return val + 1;
-      else return val;
+      if (val !== null && typeof val !== "object") return val + 1;
+      return val;
     });
-    assert(result.a[0] === 2)
-    assert(result.a[1][0] === 3)
+    assert(result.a[0] === 2);
+    assert(result.a[1][0] === 3);
 
     json = { a: [1, { b: 2 }] };
     result = ncformUtils.traverseJSON(json, (key, val) => {
-      if (val !== null && typeof val !== 'object')
-        return val + 1;
-      else return val;
+      if (val !== null && typeof val !== "object") return val + 1;
+      return val;
     });
-    assert(result.a[0] === 2)
-    assert(result.a[1].b === 3)
+    assert(result.a[0] === 2);
+    assert(result.a[1].b === 3);
 
-    json = [1, {a: 2}];
+    json = [1, { a: 2 }];
     result = ncformUtils.traverseJSON(json, (key, val) => {
-      if (val !== null && typeof val !== 'object')
-        return val + 1;
-      else return val;
+      if (val !== null && typeof val !== "object") return val + 1;
+      return val;
     });
-    assert(result[0] === 2)
-    assert(result[1].a === 3)
+    assert(result[0] === 2);
+    assert(result[1].a === 3);
   });
 });

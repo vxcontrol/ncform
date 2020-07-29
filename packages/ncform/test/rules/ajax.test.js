@@ -1,21 +1,21 @@
-import assert from 'assert';
-import nock from 'nock';
-import Ajax from '../../src/rules/ajax';
+import assert from "assert";
+import nock from "nock";
+import Ajax from "../../src/rules/ajax";
 
-describe('/src/rules/ajax.js', () => {
+describe("/src/rules/ajax.js", () => {
   beforeEach(() => {
-    nock('http://mock')
-      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .get(new RegExp('/check/true'))
-      .reply(200, function(uri) {
+    nock("http://mock")
+      .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+      .get(new RegExp("/check/true"))
+      .reply(200, uri => {
         console.log(uri);
         return true;
       });
 
-    nock('http://mock')
-      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .get(new RegExp('/check/object'))
-      .reply(200, function(uri) {
+    nock("http://mock")
+      .defaultReplyHeaders({ "access-control-allow-origin": "*" })
+      .get(new RegExp("/check/object"))
+      .reply(200, uri => {
         console.log(uri);
         return {
           result: true
@@ -23,28 +23,28 @@ describe('/src/rules/ajax.js', () => {
       });
   });
 
-  it('Interface returns true', async () => {
-    const validation = await new Ajax().validateLogic('daniel', {
-      remoteUrl: 'http://mock/check/true',
-      method: 'get',
-      paramName: 'name',
+  it("Interface returns true", async () => {
+    const validation = await new Ajax().validateLogic("daniel", {
+      remoteUrl: "http://mock/check/true",
+      method: "get",
+      paramName: "name",
       otherParams: {
-        status: 'ok'
+        status: "ok"
       }
     });
 
     assert(validation === true);
   });
 
-  it('Interface returns an object', async () => {
-    const validation = await new Ajax().validateLogic('daniel', {
-      remoteUrl: 'http://mock/check/object',
-      method: 'get',
-      paramName: 'name',
+  it("Interface returns an object", async () => {
+    const validation = await new Ajax().validateLogic("daniel", {
+      remoteUrl: "http://mock/check/object",
+      method: "get",
+      paramName: "name",
       otherParams: {
-        status: 'ok'
+        status: "ok"
       },
-      resField: 'result'
+      resField: "result"
     });
 
     assert(validation === true);

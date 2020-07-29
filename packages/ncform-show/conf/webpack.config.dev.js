@@ -1,11 +1,10 @@
 const path = require("path");
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const config = require("./config");
 
 // webpack.config.js
 module.exports = {
-
-  mode: 'development',
+  mode: "development",
 
   entry: {
     playground: path.join(config.src, "components", "playground", "index.vue"),
@@ -42,22 +41,15 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ["vue-style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-        ]
+        use: ["vue-style-loader", "css-loader"]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         include: [config.src].concat(config.babelModules)
       },
       {
@@ -72,7 +64,5 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new VueLoaderPlugin()
-  ]
+  plugins: [new VueLoaderPlugin()]
 };

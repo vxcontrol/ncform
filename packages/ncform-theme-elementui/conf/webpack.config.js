@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const merge = require("webpack-merge");
 const devConfig = require("./webpack.config.dev");
 const prdConfig = require("./webpack.config.prd");
 

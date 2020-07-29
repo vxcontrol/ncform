@@ -4,17 +4,16 @@ const webpack = require("webpack");
 const config = require("./config");
 
 module.exports = {
+  mode: "production",
 
-  mode: 'production',
-
-  devtool: 'source-map',
+  devtool: "source-map",
 
   entry: {
-    ncformStdComps: path.join(config.src, 'components', 'index.js'),
+    ncformStdComps: path.join(config.src, "components", "index.js")
   },
 
   output: {
-    filename: "[name].min.js",
+    filename: "[name].min.js"
   },
 
   optimization: {

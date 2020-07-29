@@ -1,10 +1,9 @@
 const path = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const config = require("./config");
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-
-  mode: 'development',
+  mode: "development",
 
   entry: {
     vueNcform: path.join(config.src, "components", "vue-ncform", "index.js")
@@ -49,15 +48,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ["vue-style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         include: [config.src].concat(config.babelModules)
       },
       {
@@ -72,7 +67,5 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new VueLoaderPlugin()
-  ]
+  plugins: [new VueLoaderPlugin()]
 };

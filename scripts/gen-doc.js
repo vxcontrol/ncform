@@ -120,7 +120,9 @@ function genNcformThemeElementuiDoc() {
 
   // 文档需要单独的layout和control源码
   console.info("Building all layouts and controls...");
-  cp.execSync(`cd ${rootPath}/packages/ncform-theme-elementui && npm run build`);
+  cp.execSync(
+    `cd ${rootPath}/packages/ncform-theme-elementui && npm run build`
+  );
 
   fs.ensureDirSync(path.join(docTempPathNcformTheme, "assets"));
 

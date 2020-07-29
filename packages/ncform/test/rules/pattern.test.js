@@ -13,7 +13,7 @@ describe("/src/rules/pattern.js", () => {
   });
 
   it("If enter hello, '\\d' (string type) then return false", async () => {
-    const validation = new Pattern().validateLogic("hello", "\d");
+    const validation = new Pattern().validateLogic("hello", "\\d");
     assert(validation === false);
   });
 

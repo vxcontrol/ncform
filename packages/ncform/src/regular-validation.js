@@ -32,7 +32,7 @@ class RegularValidation {
               result: false,
               errMsg:
                 "[Error] The custom validation rule should be an array " +
-                  "of objects each containing script, errMsg field."
+                "of objects each containing script, errMsg field."
             });
           }
 

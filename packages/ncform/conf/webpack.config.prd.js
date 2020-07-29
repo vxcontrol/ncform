@@ -4,14 +4,13 @@ const webpack = require("webpack");
 const config = require("./config");
 
 module.exports = {
-
-  mode: 'production',
+  mode: "production",
 
   output: {
-    filename: "[name].min.js",
+    filename: "[name].min.js"
   },
 
-  devtool: 'source-map',
+  devtool: "source-map",
 
   optimization: {
     minimize: true

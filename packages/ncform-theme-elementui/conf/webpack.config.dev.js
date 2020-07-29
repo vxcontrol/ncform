@@ -1,14 +1,13 @@
 const path = require("path");
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const config = require("./config");
 
 // webpack.config.js
 const webpackConfig = {
+  mode: "development",
 
-  mode: 'development',
-
-  devtool: 'cheap-module-eval-source-map',
+  devtool: "cheap-module-eval-source-map",
 
   entry: {
     input: path.join(config.src, "components", "control-comps", "input.vue"),
@@ -113,15 +112,11 @@ const webpackConfig = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ["vue-style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         include: [config.src].concat(config.babelModules)
       },
       {
@@ -136,17 +131,14 @@ const webpackConfig = {
     ]
   },
 
-  plugins: [
-    new VueLoaderPlugin()
-  ]
+  plugins: [new VueLoaderPlugin()]
 };
-
 
 module.exports = [
   webpackConfig,
   Object.assign({}, webpackConfig, {
     entry: {
-      ncformStdComps: path.join(config.src, 'components', 'index.js'),
+      ncformStdComps: path.join(config.src, "components", "index.js")
     }
   })
-]
+];
