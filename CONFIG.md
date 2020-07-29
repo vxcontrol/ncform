@@ -56,7 +56,7 @@
         },
         linkFields: [ // Associated fields. when the value changes, it will trigger some actions of the associated field, such as rules check
           {
-            fieldPath: '', // The associated item field path. such as 'user.name'，'user[i].name'
+            fieldPath: '', // The associated item field path. such as 'user.name', 'user[i].name'
             rules: [], // The rules, such as ['required']
           }
         ],
@@ -120,7 +120,7 @@
           errMsg: '', // Error message
           linkItems: [ // When the check is triggered, the customRule rule validation of these associated items is also triggered (recommended using ui.linkFields instead)
             {
-              fieldPath: '', // The associated item field path. such as 'user.name'，'user[i].name'
+              fieldPath: '', // The associated item field path. such as 'user.name', 'user[i].name'
               customRuleIdx: 0 // The index of the customRule of the link item
             }
           ]

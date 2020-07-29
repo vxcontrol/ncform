@@ -41,7 +41,7 @@
           <!-- 图片 -->
           <img v-if="schema.ui.preview.type === 'image'"
             :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
-            :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="Preview area">
           <!-- 视频 -->
           <video v-if="schema.ui.preview.type === 'video'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" controls="controls"></video>
           <!-- 音频 -->

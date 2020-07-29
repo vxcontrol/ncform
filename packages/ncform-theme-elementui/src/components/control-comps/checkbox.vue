@@ -142,7 +142,7 @@
           type: 'checkbox', // 显示类型，可选值：[checkbox | button]
           itemValueField: 'value', // 值字段
           itemLabelField: 'label', // 显示字段
-          enumSource: [], // 可选项，默认值[{label: '是'}]
+          enumSource: [], // 可选项，默认值[{label: 'Yes'}]
           enumSourceRemote: { // 远程数据源
             remoteUrl: '', // 如果是远程访问，则填写该url
             resField: '', // 响应结果的字段

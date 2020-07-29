@@ -9,12 +9,12 @@ module.exports = {
   },
   '/api/test/getMsg': { msg: 'Hello' },
   '/api/test/getProvinces': (params) => {
-    return [{ id: 1, name: '广东' }, { id: 2, name: '北京' }].filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
+    return [{ id: 1, name: 'Guangdong' }, { id: 2, name: 'Beijing' }].filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
   },
   '/api/test/getCities': (params) => {
     let result = {
-      1: [{ id: 10, name: '广州' }, { id: 20, name: '汕头' }],
-      2: [{ id: 30, name: '北京' }]
+      1: [{ id: 10, name: 'Canton' }, { id: 20, name: 'Shantou' }],
+      2: [{ id: 30, name: 'Beijing' }]
     }
     let res = result[params.provinceId] || [];
     return res.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);

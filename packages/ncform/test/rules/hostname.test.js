@@ -2,17 +2,17 @@ import assert from "assert";
 import Hostname from "../../src/rules/hostname.js";
 
 describe("/src/rules/hostname.js", () => {
-  it("https://dx.com/ 是hostname", async () => {
+  it("If value https://dx.com/ is hostname then return true", async () => {
     const validation = new Hostname().validateLogic("https://dx.com/", true);
     assert(validation === true);
   });
 
-  it("http://www.dx.com/ 是hostname", async () => {
+  it("If value http://www.dx.com/ is hostname then return true", async () => {
     const validation = new Hostname().validateLogic("http://dx.com/", true);
     assert(validation === true);
   });
 
-  it("httpxxx://dx.com/ 不是hostname", async () => {
+  it("If value httpxxx://dx.com/ is not hostname then return false", async () => {
     const validation = new Hostname().validateLogic("httpxxx://dx.com/", true);
     assert(validation === false);
   });

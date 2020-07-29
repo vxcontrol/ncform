@@ -205,7 +205,7 @@ export default {
       sizeTips2:
         "Please upload a file larger than <%= right %>KB, your file is <%= wrong %>KB"
     },
-    ru = {
+    ru: {
       selectPls: "Выберите",
       uploading: "Загрузка...",
       upload: "Загрузить",

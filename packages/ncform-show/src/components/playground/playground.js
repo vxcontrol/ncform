@@ -1019,7 +1019,7 @@ export default {
             fullname: {
               type: "string",
               valueTemplate:
-                'dx: {{$root.firstname}} + " " +　{{$root.lastname}}',
+                'dx: {{$root.firstname}} + " " + {{$root.lastname}}',
               ui: {
                 columns: 12
               }

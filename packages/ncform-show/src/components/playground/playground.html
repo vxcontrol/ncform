@@ -7,7 +7,7 @@
       </a>
 
       {{i18n.template}}：
-      <el-select v-model="selectVal" placeholder="请选择" @change="templateChange">
+      <el-select v-model="selectVal" placeholder="please choose" @change="templateChange">
         <el-option v-for="item in listOptions" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>

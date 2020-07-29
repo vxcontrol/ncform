@@ -85,6 +85,8 @@ describe('/src/ncform-utils.js', () => {
       },
       validationMsg: {},
       constants: {},
+      status: "edit",
+      updateWait: 1000,
       scrollToFailField: { // Automatically scroll to fields that failed validation
         enabled: true, // enable this feature or not
         container: 'body',
@@ -102,7 +104,7 @@ describe('/src/ncform-utils.js', () => {
 
   // --- getModelFromSchema
 
-  it("getModelFromSchema - object类型 有value", () => {
+  it("getModelFromSchema - object type has value", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -127,7 +129,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(result.username === 'daniel' && result.age === 5);
   });
-  it("getModelFromSchema - object类型 只有default值", () => {
+  it("getModelFromSchema - object type only default value", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -150,7 +152,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(result.username === 'daniel' && result.age === 5);
   });
-  it("getModelFromSchema - object类型 只有default值 default值是dx表达式", () => {
+  it("getModelFromSchema - object type only default value default value is dx expression", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -173,7 +175,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(result.username === 'hello daniel' && result.age === 6);
   });
-  it("getModelFromSchema - object类型 底下value高于上级", () => {
+  it("getModelFromSchema - object type The bottom value is higher than the superior", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -202,7 +204,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(result.username === 'daniel' && result.age === 5);
   });
-  it("getModelFromSchema - array类型 有value", () => {
+  it("getModelFromSchema - array type has value", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -233,7 +235,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(JSON.stringify(result.user) === JSON.stringify(['daniel', 'xiao']));
   });
-  it("getModelFromSchema - array类型 只有default值", () => {
+  it("getModelFromSchema - array type only default value", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -252,7 +254,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(JSON.stringify(result.user) === JSON.stringify(['hi', 'daniel']));
   });
-  it("getModelFromSchema - array类型 只有default值 dx表达式", () => {
+  it("getModelFromSchema - array type only default value dx expression", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -269,7 +271,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(JSON.stringify(result.user) === JSON.stringify(['hi', 'hi']));
   });
-  it("getModelFromSchema - array类型 没有值", () => {
+  it("getModelFromSchema - array type has no value", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -285,7 +287,7 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(JSON.stringify(result.user) === JSON.stringify([]));
   });
-  it("getModelFromSchema - 大写的类型，如HTML，COMP类型值 自动过滤掉", () => {
+  it("getModelFromSchema - uppercase types, such as HTML, COMP type values are automatically filtered out", () => {
     const formSchema = {
       type: 'object',
       properties: {
@@ -309,7 +311,7 @@ describe('/src/ncform-utils.js', () => {
 
   // --- setValueToSchema
 
-  it("setValueToSchema - 普通对象", () => {
+  it("setValueToSchema - ordinary object", () => {
     const value = {
       name: 'daniel'
     };
@@ -325,7 +327,7 @@ describe('/src/ncform-utils.js', () => {
     console.log(formSchema);
     assert(formSchema.properties.name.value === value.name);
   });
-  it("setValueToSchema - 嵌套对象", () => {
+  it("setValueToSchema - nested object", () => {
     const value = {
       name: {
         firstname: 'daniel',
@@ -355,7 +357,7 @@ describe('/src/ncform-utils.js', () => {
         value.name.lastname
     );
   });
-  it("setValueToSchema - 对象嵌套数组", () => {
+  it("setValueToSchema - nested array of objects", () => {
     const value = {
       name: ['daniel', 'xiao']
     };
@@ -374,7 +376,7 @@ describe('/src/ncform-utils.js', () => {
     console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.properties.name.value === value.name);
   });
-  it("setValueToSchema - 对象嵌套数组再嵌套对象", () => {
+  it("setValueToSchema - nested array of objects and then objects", () => {
     const value = {
       user: [
         {
@@ -403,7 +405,7 @@ describe('/src/ncform-utils.js', () => {
     console.log(JSON.stringify(formSchema, null, 2));
     assert(JSON.stringify(formSchema.properties.user.value) === JSON.stringify(value.user));
   });
-  it("setValueToSchema - 普通数组", () => {
+  it("setValueToSchema - ordinary array", () => {
     const value = ['daniel', 'sarah'];
     const formSchema = {
       type: 'array',
@@ -415,7 +417,7 @@ describe('/src/ncform-utils.js', () => {
     console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.value === value);
   });
-  it("setValueToSchema - 嵌套数组", () => {
+  it("setValueToSchema - nested array", () => {
     const value = [['hi'], ['hello']];
     const formSchema = {
       type: 'array',
@@ -430,7 +432,7 @@ describe('/src/ncform-utils.js', () => {
     console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.value === value);
   });
-  it("setValueToSchema - 非schema的对象", () => {
+  it("setValueToSchema - non-schema object", () => {
     const value = {
       name: {
         firstname: 'daniel'
@@ -450,7 +452,7 @@ describe('/src/ncform-utils.js', () => {
         JSON.stringify({ firstname: 'daniel' })
     );
   });
-  it("setValueToSchema - 非schema的数组", () => {
+  it("setValueToSchema - non-schema array", () => {
     const value = {
       name: ['daniel', 'hi']
     };
@@ -468,7 +470,7 @@ describe('/src/ncform-utils.js', () => {
         JSON.stringify(value.name)
     );
   });
-  it("setValueToSchema - 空值赋值默认值", () => {
+  it("setValueToSchema - null value assignment default value", () => {
     let value;
     let formSchema = {
       type: 'object',
@@ -526,7 +528,7 @@ describe('/src/ncform-utils.js', () => {
         JSON.stringify({ firstname: 'daniel' })
     );
   });
-  it("setValueToSchema - 强制覆盖子值", () => {
+  it("setValueToSchema - mandatory overwrite sub-value", () => {
     const value = {
       name: ['daniel', 'hi']
     };
@@ -562,7 +564,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- getSchemaByPath
-  it("getSchemaByPath - 单纯对象类型", () => {
+  it("getSchemaByPath - pure object type", () => {
     let fromSchema = {
       type: 'object',
       properties: {
@@ -590,7 +592,7 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.getSchemaByPath(fromSchema, 'name.firstname');
     assert(JSON.stringify(result) === JSON.stringify({ type: 'string' }));
   });
-  it("getSchemaByPath - 有数组类型", () => {
+  it("getSchemaByPath - has an array type", () => {
     let fromSchema = {
       type: 'object',
       properties: {
@@ -661,7 +663,7 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.getSchemaByPath(fromSchema, 'person[0].phones[0]');
     assert(JSON.stringify(result) === JSON.stringify({ type: 'string' }));
   });
-  it("getSchemaByPath - 数组项之间", () => {
+  it("getSchemaByPath - between array items", () => {
     let fromSchema = {
       type: 'object',
       properties: {
@@ -739,7 +741,7 @@ describe('/src/ncform-utils.js', () => {
 
   // --- smartAnalyzeVal
 
-  it("smartAnalyzeVal - 普通值", () => {
+  it("smartAnalyzeVal - regular value", () => {
     let result = ncformUtils.smartAnalyzeVal('hello daniel');
     assert(result === 'hello daniel');
     result = ncformUtils.smartAnalyzeVal(true);
@@ -752,7 +754,7 @@ describe('/src/ncform-utils.js', () => {
     assert(JSON.stringify(result) === JSON.stringify(['daniel']));
   });
 
-  it("smartAnalyzeVal - 函数值", () => {
+  it("smartAnalyzeVal - function value", () => {
     const rootData = { name: 'daniel' };
     const sayHi = 'hi';
 
@@ -763,7 +765,7 @@ describe('/src/ncform-utils.js', () => {
     assert(result === true);
   });
 
-  it("smartAnalyzeVal - 函数值数组项", () => {
+  it("smartAnalyzeVal - function value array item", () => {
     let rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
     let sayHi = 'hi';
 
@@ -783,7 +785,7 @@ describe('/src/ncform-utils.js', () => {
     assert(result === true);
   });
 
-  it("smartAnalyzeVal - 特殊字符串", () => {
+  it("smartAnalyzeVal - special string", () => {
     const rootData = { persons: [{ age: 18 }, { age: 20 }] };
     const constData = { max: 18 };
 
@@ -820,7 +822,7 @@ describe('/src/ncform-utils.js', () => {
     assert(result === 'hello daniel');
   });
 
-  it("smartAnalyzeVal - 特殊字符串 嵌套数组", () => {
+  it("smartAnalyzeVal - special string nested array", () => {
     const rootData = {
       persons: [[{ age: 12 }, { age: 18 }], [{ age: 50 }, { age: 80 }]]
     };
@@ -834,7 +836,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- smartAnalyze
-  it("smartAnalyze - 普通值", () => {
+  it("smartAnalyze - regular value", () => {
     let result = ncformUtils.smartAnalyze('hello daniel');
     assert(result === 'hello daniel');
     result = ncformUtils.smartAnalyze(true);
@@ -846,7 +848,7 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.smartAnalyze(['daniel']);
     assert(JSON.stringify(result) === JSON.stringify(['daniel']));
   });
-  it("smartAnalyze - 函数值", () => {
+  it("smartAnalyze - function value", () => {
     const val = function(itemValue, formData) {
       return `${formValue.name}'s age is ${itemValue.age}`;
     };
@@ -860,7 +862,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result === "daniel's age is 18");
   });
-  it("smartAnalyze - 特殊字符串", () => {
+  it("smartAnalyze - special string", () => {
     const value = { age: 2 };
     const val = 'dx: {{$item.age}} + 18';
     const result = ncformUtils.smartAnalyze(val, {
@@ -868,7 +870,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result === 20);
   });
-  it("smartAnalyze - e表达式", () => {
+  it("smartAnalyze - dx expression", () => {
     let value = [{ id: 2 }, { id: 4 }];
     let val = 'dx: {{$selected[e].id}}';
     let result = ncformUtils.smartAnalyze(val, {
@@ -897,7 +899,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(JSON.stringify(result) === JSON.stringify([1, 11]));
   });
-  it("smartAnalyze - 根数据是数组", () => {
+  it("smartAnalyze - root data is an array", () => {
     let value = ['hi', 'hello'];
     let val = 'dx: {{$items[0]}} + " daniel"';
     let result = ncformUtils.smartAnalyze(val, {
@@ -928,7 +930,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result === 'hello daniel');
   });
-  it("smartAnalyze - 根数据是对象，直接访问对象值", () => {
+  it("smartAnalyze - the root data is the object (directly accessed)", () => {
     const value = { age: 2 };
     const val = 'dx: {{$item}}';
     const result = ncformUtils.smartAnalyze(val, {
@@ -936,7 +938,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result.age === 2);
   });
-  it("smartAnalyze - 根数据是数组，直接访问数组值", () => {
+  it("smartAnalyze - the root data is an array, directly access the array value", () => {
     const value = ['daniel', 'sarah'];
     const val = 'dx: {{$items}}';
     const result = ncformUtils.smartAnalyze(val, {
@@ -944,7 +946,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result[0] === 'daniel');
   });
-  it("smartAnalyze - 根数据是原始类型", () => {
+  it("smartAnalyze - root data is primitive type", () => {
     const value = 'hi';
     const val = 'dx: {{$msg}} + " daniel"';
     const result = ncformUtils.smartAnalyze(val, {
@@ -952,7 +954,7 @@ describe('/src/ncform-utils.js', () => {
     });
     assert(result === 'hi daniel');
   });
-  it("smartAnalyze - 取一个不存在的值", () => {
+  it("smartAnalyze - take a value that does not exist", () => {
     const value = {};
     const val = 'dx: {{$data.name}}';
     const result = ncformUtils.smartAnalyze(val, {
@@ -961,7 +963,7 @@ describe('/src/ncform-utils.js', () => {
     assert(result === undefined);
   });
 
-  it("smartAnalyze - 不修改输入的data", () => {
+  it("smartAnalyze - do not modify the input data", () => {
     const value = { name: 'kyle' };
     const val = 'dx: {{$data.name}}';
     const valueString1 = JSON.stringify(value);
@@ -973,7 +975,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- getDefVal
-  it("getDefVal - 验证所有数据类型的默认值是否正确", () => {
+  it("getDefVal - verify that the default values of all data types are correct", () => {
     const stringDefVal = ncformUtils.getDefVal('string');
     assert(stringDefVal === '');
 
@@ -994,7 +996,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- getValType
-  it("getValType - 验证所有数据类型是否正确", () => {
+  it("getValType - verify that all data types are correct", () => {
     const undefinedType = ncformUtils.getValType(undefined);
     assert(undefinedType === 'undefined');
 
@@ -1015,7 +1017,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- notEmptyVal
-  it("notEmptyVal - 验证所有数据类型的空数据", () => {
+  it("notEmptyVal - verify empty data for all data types", () => {
     let result = ncformUtils.notEmptyVal(undefined);
     assert(!result);
 
@@ -1036,7 +1038,7 @@ describe('/src/ncform-utils.js', () => {
   });
 
   // --- priorityGetValue
-  it("priorityGetValue - 基础类型", () => {
+  it("priorityGetValue - basic type", () => {
     let result = ncformUtils.priorityGetValue(
       'basic',
       'first',
@@ -1054,7 +1056,7 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.priorityGetValue('basic', undefined, null, 'simon');
     assert(result === 'simon');
   });
-  it("priorityGetValue - 对象类型", () => {
+  it("priorityGetValue - object type", () => {
     let result = ncformUtils.priorityGetValue(
       'object',
       { a: 1 },
@@ -1072,7 +1074,7 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.priorityGetValue('object', undefined, null, { a: 1 });
     assert(JSON.stringify(result) === JSON.stringify({ a: 1 }));
   });
-  it("priorityGetValue - 数组类型", () => {
+  it("priorityGetValue - array type", () => {
     let result = ncformUtils.priorityGetValue(
       'array',
       ['a'],

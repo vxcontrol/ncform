@@ -102,7 +102,7 @@
           type: 'radio', // 显示类型，可选值：[radio | button]
           itemValueField: 'value', // 值字段
           itemLabelField: 'label', // 显示字段
-          enumSource: [], // 可选项，默认[{value: true, label: '是'}, {value: false, label: '否'}]
+          enumSource: [], // 可选项，默认[{value: true, label: 'Yes'}, {value: false, label: 'No'}]
           enumSourceRemote: { // 远程数据源
             remoteUrl: '', // 如果是远程访问，则填写该url
             resField: '', // 响应结果的字段

@@ -226,7 +226,7 @@ If you don't like the cold text description, click on the [interactive version](
   showText: false, // Whether to display auxiliary text, if true, the text content corresponding to the current score will be selected from the texts array
   showScore: false, // Whether to display the current score, showScore and showText cannot be true at the same time
   textColor: '#1F2D3D', // Auxiliary text color
-  texts: ['极差', '失望', '一般', '满意', '惊喜'] // Auxiliary text array
+  texts: ['worst', 'disappointed', 'fair', 'satisfied', 'surpris'] // Auxiliary text array
 }
 ```
 

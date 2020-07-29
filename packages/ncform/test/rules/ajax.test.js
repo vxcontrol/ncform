@@ -23,7 +23,7 @@ describe('/src/rules/ajax.js', () => {
       });
   });
 
-  it('接口返回 true', async () => {
+  it('Interface returns true', async () => {
     const validation = await new Ajax().validateLogic('daniel', {
       remoteUrl: 'http://mock/check/true',
       method: 'get',
@@ -36,7 +36,7 @@ describe('/src/rules/ajax.js', () => {
     assert(validation === true);
   });
 
-  it('接口返回 object', async () => {
+  it('Interface returns an object', async () => {
     const validation = await new Ajax().validateLogic('daniel', {
       remoteUrl: 'http://mock/check/object',
       method: 'get',

@@ -2,32 +2,32 @@ import assert from "assert";
 import Required from "../../src/rules/required.js";
 
 describe("/src/rules/required.js", () => {
-  it("输入0，返回 true", async () => {
+  it("If enter 0 then return true", async () => {
     const validation = new Required().validateLogic(0, true);
     assert(validation === true);
   });
 
-  it("输入正常字符串，返回 true", async () => {
+  it("If enter a regular string then return true", async () => {
     const validation = new Required().validateLogic("aa", true);
     assert(validation === true);
   });
 
-  it("输入空数组，返回 false", async () => {
+  it("If enter empty array then return false", async () => {
     const validation = new Required().validateLogic([], true);
     assert(validation === false);
   });
 
-  it("输入undefined，返回 false", async () => {
+  it("If enter undefined then return false", async () => {
     const validation = new Required().validateLogic(undefined, true);
     assert(validation === false);
   });
 
-  it("输入空字符串，返回 false", async () => {
+  it("If enter empty string then return false", async () => {
     const validation = new Required().validateLogic("", true);
     assert(validation === false);
   });
 
-  it("输入NaN，返回 false", async () => {
+  it("If enter NaN then return false", async () => {
     const validation = new Required().validateLogic(NaN, true);
     assert(validation === false);
   });

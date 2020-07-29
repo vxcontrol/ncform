@@ -2,42 +2,42 @@ import assert from "assert";
 import Number from "../../src/rules/number.js";
 
 describe("/src/rules/number.js", () => {
-  it("无输入，返回false", async () => {
+  it("If no enter value then return false", async () => {
     const validation = new Number().validateLogic(undefined, true);
     assert(validation === false);
   });
 
-  it("输入非数字字符串，返回false", async () => {
+  it("If enter value as non-numeric string then return false", async () => {
     const validation = new Number().validateLogic("something", true);
     assert(validation === false);
   });
 
-  it("输入正整数，返回true", async () => {
+  it("If enter positive number then return true", async () => {
     const validation = new Number().validateLogic(123, true);
     assert(validation === true);
   });
 
-  it("输入负整数，返回true", async () => {
+  it("If enter negative number then return true", async () => {
     const validation = new Number().validateLogic(-123, true);
     assert(validation === true);
   });
 
-  it("输入小数，返回true", async () => {
+  it("If enter decimal number then return true", async () => {
     const validation = new Number().validateLogic(123.45, true);
     assert(validation === true);
   });
 
-  it("输入整数字符串，返回true", async () => {
+  it("If enter integer number as a string then return true", async () => {
     const validation = new Number().validateLogic("123", true);
     assert(validation === true);
   });
 
-  it("输入小数字符串，返回true", async () => {
+  it("If enter decimal number as a string then return true", async () => {
     const validation = new Number().validateLogic("0.123", true);
     assert(validation === true);
   });
 
-  it("输入负数字符串，返回true", async () => {
+  it("If enter negative number as a string then return true", async () => {
     const validation = new Number().validateLogic("-123", true);
     assert(validation === true);
   });

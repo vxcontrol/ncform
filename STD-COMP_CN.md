@@ -94,7 +94,7 @@
       maxSize: 0, // 最大文件大小，单位KB，0代表不限
       minSize: 0 // 最小文件大小，单位KB，0代表不限
     },
-    uploadText: '点击上传', //  上传按钮的名称
+    uploadText: 'Click upload', //  上传按钮的名称
     headers: {}, // 设置上传的请求头部
   }
 }
@@ -226,7 +226,7 @@
   showText: false, // 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容
   showScore: false, // 是否显示当前分数，showScore 和 showText 不能同时为真
   textColor: '#1F2D3D', // 辅助文字的颜色
-  texts: ['极差', '失望', '一般', '满意', '惊喜'] // 辅助文字数组
+  texts: ['worst', 'disappointed', 'fair', 'satisfied', 'surpris'] // 辅助文字数组
 }
 ```
 

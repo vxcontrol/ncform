@@ -31,7 +31,8 @@ class RegularValidation {
             resolve({
               result: false,
               errMsg:
-                "【Error】自定义验证规则应为对象数组，每项包含script,errMsg字段。"
+                "[Error] The custom validation rule should be an array " +
+                  "of objects each containing script, errMsg field."
             });
           }
 
@@ -98,7 +99,7 @@ class RegularValidation {
           const delayMsg = _get(
             rules[keys[i]],
             "options.delayMsg",
-            "异步验证中.."
+            "Asynchronous validation..."
           );
 
           // 触发上一个验证绑定的事件，取消上一次验证。
@@ -171,7 +172,8 @@ class RegularValidation {
     if (Object.keys(obj).indexOf("customRule") !== -1) {
       delete obj.customRule;
       throw new Error(
-        "customRule 注册失败。 customRule为【自定义规则】专用规则名，请更换。"
+        "Failed registration of customRule. It is the special rule name " +
+          "of [custom rule], please change it."
       );
     }
     this.allRules = Object.assign({}, this.allRules, obj);
