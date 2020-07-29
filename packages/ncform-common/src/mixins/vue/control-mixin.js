@@ -8,6 +8,7 @@ export default {
 
   i18nData: {
     en: {},
+    ru: {},
     zh_cn: {}
   },
 

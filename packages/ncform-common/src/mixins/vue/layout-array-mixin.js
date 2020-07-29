@@ -7,6 +7,7 @@ import ncformUtils from "../../ncform-utils";
 export default {
   i18nData: {
     en: {},
+    ru: {},
     zh_cn: {}
   },
 

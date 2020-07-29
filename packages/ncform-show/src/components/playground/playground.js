@@ -35,6 +35,13 @@ export default {
           notValidJSON: "Not valid JSON data",
           moreComp: "See more widgets"
         },
+        ru: {
+          template: "Шаблон",
+          genForm: "Создать",
+          getData: "Получить данные",
+          notValidJSON: "Ошибка JSON формата данных",
+          moreComp: "Показать больше виджетов"
+        },
         cn: {
           template: "模板",
           genForm: "生成表单",

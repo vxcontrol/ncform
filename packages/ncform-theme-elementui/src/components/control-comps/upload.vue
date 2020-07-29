@@ -161,6 +161,17 @@
         uploadSomeFail: 'Some files failed to upload!',
         limitTips: 'No more than <%= limit %> files can be selected, please re-select'
       },
+      ru: {
+        uploadTips: 'Перетащите сюда файл или <em>нажмите загрузить</em>',
+        uploadServer: 'Загрузить на сервер',
+        upload: 'Загрузить',
+        chFile: 'Выберите файл',
+        successChTips: 'Выбрано <%= fileCount %> файлов',
+        uploadSuccess: 'Загрузка прошла успешно!',
+        uploadFail: 'Ошибка загрузки всех файлов!',
+        uploadSomeFail: 'Ошибка загрузки некоторых файлов!',
+        limitTips: 'Можно выбрать не более чем <%= limit %> файлов, повторите выбор'
+      },
       zh_cn: {
         uploadTips: '将文件拖到此处，或<em>点击上传</em>',
         uploadServer: '上传到服务器',

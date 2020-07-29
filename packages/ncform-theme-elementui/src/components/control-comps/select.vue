@@ -49,6 +49,9 @@ export default {
     en: {
       selectPls: "Select Please"
     },
+    ru: {
+      selectPls: "Выберите"
+    },
     zh_cn: {
       selectPls: "请选择"
     }

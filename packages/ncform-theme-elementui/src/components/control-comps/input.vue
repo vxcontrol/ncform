@@ -205,6 +205,20 @@ export default {
       sizeTips2:
         "Please upload a file larger than <%= right %>KB, your file is <%= wrong %>KB"
     },
+    ru = {
+      selectPls: "Выберите",
+      uploading: "Загрузка...",
+      upload: "Загрузить",
+      uploadFail: "Ошибка загрузки, попробуйте снова!",
+      resolutionTip1:
+        "Загрузите изображение <%= right %>, ваше изображение <%= wrong %>",
+      resolutionTip2:
+        "Загрузите изображение с соотношением сторон <%= right %>. Ваше соотношение сторон изображения <%= wrong %>",
+      sizeTips1:
+        "Загрузите файл меньше, чем <%= right %>KB, ваш файл <%= wrong %>KB",
+      sizeTips2:
+        "Загрузите файл больше, чем <%= right %>KB, ваш файл <%= wrong %>KB"
+    },
     zh_cn: {
       selectPls: "请选择",
       uploading: "上传中...",

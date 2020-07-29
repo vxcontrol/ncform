@@ -107,6 +107,12 @@
         delItemTips: 'Are you sure to delete this item?',
         delAllTips: 'Are you sure to delete all?'
       },
+      ru: {
+        add: 'Добавить',
+        delAll: 'Удалить все',
+        delItemTips: 'Вы действительно хотите удалить этот элемент?',
+        delAllTips: 'Вы действительно хотите удалить все элементы?'
+      },
       zh_cn: {
         add: '增加',
         delAll: '删除全部',

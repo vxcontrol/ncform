@@ -94,6 +94,13 @@
         delItemTips: 'Are you sure to delete this item?',
         delAllTips: 'Are you sure to delete all?'
       },
+      ru: {
+        action: 'Действие',
+        add: 'Добавить',
+        delAll: 'Удалить все',
+        delItemTips: 'Вы действительно хотите удалить этот элемент?',
+        delAllTips: 'Вы действительно хотите удалить все элементы?'
+      },
       zh_cn: {
         action: '操作',
         add: '增加',

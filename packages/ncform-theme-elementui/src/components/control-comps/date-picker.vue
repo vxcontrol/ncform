@@ -66,6 +66,14 @@ export default {
       chTime: 'Choose Datetime',
       weekFormat: 'Week WW of yyyy'
     },
+    ru: {
+      chYear: 'Выберите год',
+      chMonth: 'Выберите месяц',
+      chDate: 'Выберите дату',
+      chWeek: 'Выберите неделю',
+      chTime: 'Выберите время',
+      weekFormat: 'WW неделя yyyy года'
+    },
     zh_cn: {
       chYear: '选择年份',
       chMonth: '选择月份',

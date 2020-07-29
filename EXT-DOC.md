@@ -98,6 +98,9 @@ export default {
     en: {
       hi: 'Hi <%= name %>'
     },
+    ru: {
+      hi: 'Привет <%= name %>'
+    },
     zh_cn: {
       hi: '你好 <%= name %>'
     }

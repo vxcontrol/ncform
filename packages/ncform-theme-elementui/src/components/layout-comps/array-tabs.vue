@@ -95,10 +95,13 @@
 
     i18nData: {
       en: {
-        delItemTips: 'Are you sure to delete this item?',
+        delItemTips: 'Are you sure to delete this item?'
+      },
+      ru: {
+        delItemTips: 'Вы действительно хотите удалить этот элемент?'
       },
       zh_cn: {
-        delItemTips: '确定要删除该项吗？',
+        delItemTips: '确定要删除该项吗？'
       }
     },
 

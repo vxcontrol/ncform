@@ -70,6 +70,10 @@
         yes: 'Yes',
         no: 'No'
       },
+      ru: {
+        yes: 'Да',
+        no: 'Нет'
+      },
       zh_cn: {
         yes: '是',
         no: '否'
