@@ -132,7 +132,6 @@ export default {
       } catch (error) {
         console.error(error);
         vm.setAlertMsg("Not valid JSON data.", true);
-
       }
 
       vm.$options.output.setValue(resultJSONStr);

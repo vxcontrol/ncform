@@ -47,5 +47,5 @@ export default {
   minProperties,
   pattern,
   url,
-  ajax,
+  ajax
 };

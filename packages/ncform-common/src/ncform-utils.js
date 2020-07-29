@@ -18,7 +18,9 @@ const ncformUtils = {
       } catch (err) {
         throw new Error("fromSchema must be a valid json format", err);
       }
-    } else if (Object.prototype.toString.call(formSchema) === '[object Object]') {
+    } else if (
+      Object.prototype.toString.call(formSchema) === "[object Object]"
+    ) {
       returnSchema = formSchema;
     } else {
       throw new Error("fromSchema must be a json object");
@@ -69,10 +71,10 @@ const ncformUtils = {
     }
 
     function addDefField(fieldName, fieldSchema) {
-      let type = fieldSchema.type || "string";
+      const type = fieldSchema.type || "string";
       const fullFields = {
         /* 数据本身 */
-        type: type,
+        type,
         value: null, // 这里给了null，否则如果是对象这种，默认值就不会被覆盖了
         // value: ncformUtils.getDefVal(fieldSchema.type),
 
@@ -82,8 +84,11 @@ const ncformUtils = {
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
           showLabel: true,
-          showLegend: (ncformUtils.isNormalObjSchema(fieldSchema) || ncformUtils.isNormalArrSchema(fieldSchema)) ? true : false,
-          noLabelSpace: type.toUpperCase() === type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
+          showLegend: !!(
+            ncformUtils.isNormalObjSchema(fieldSchema) ||
+            ncformUtils.isNormalArrSchema(fieldSchema)
+          ),
+          noLabelSpace: type.toUpperCase() === type, // 大写的类型为特殊的只读类型，所以不需要显示label
           description: "",
           placeholder: "",
           disabled: false,
@@ -95,8 +100,7 @@ const ncformUtils = {
           },
 
           /* 渲染组件字段 */
-          widget:
-            fieldSchema.widget || getDefWidget(type),
+          widget: fieldSchema.widget || getDefWidget(type),
           widgetConfig: {
             placeholder: _get(fieldSchema, "ui.placeholder", ""),
             disabled: _get(fieldSchema, "ui.disabled", false),
@@ -144,11 +148,12 @@ const ncformUtils = {
           constants: {
             // 常量数据，可通过{{$const.}}访问
           },
-          scrollToFailField: { // Automatically scroll to fields that failed validation
+          scrollToFailField: {
+            // Automatically scroll to fields that failed validation
             enabled: true, // enable this feature or not
-            container: 'body',
+            container: "body",
             duration: 500, // The duration (in milliseconds) of the scrolling animation
-            offset: -80, // The offset that should be applied when scrolling.
+            offset: -80 // The offset that should be applied when scrolling.
           },
           updateWait: 1000
         };
@@ -184,15 +189,17 @@ const ncformUtils = {
               formSchema.properties[key],
               key
             );
-          } else {
-            if (formSchema.properties[key].type.toUpperCase() !== formSchema.properties[key].type) { // 大写的类型忽略掉
-              model[key] = ncformUtils.priorityGetValue(
-                "basic",
-                formSchema.properties[key].value,
-                ncformUtils.smartAnalyze(formSchema.properties[key].default),
-                ncformUtils.getDefVal(formSchema.properties[key].type)
-              );
-            }
+          } else if (
+            formSchema.properties[key].type.toUpperCase() !==
+            formSchema.properties[key].type
+          ) {
+            // 大写的类型忽略掉
+            model[key] = ncformUtils.priorityGetValue(
+              "basic",
+              formSchema.properties[key].value,
+              ncformUtils.smartAnalyze(formSchema.properties[key].default),
+              ncformUtils.getDefVal(formSchema.properties[key].type)
+            );
           }
         });
       }
@@ -343,7 +350,10 @@ const ncformUtils = {
    */
   smartAnalyzeVal(
     val,
-    { idxChain = "", data = { rootData: {}, constData: {}, selfData: {}, tempData: {} } } = {}
+    {
+      idxChain = "",
+      data = { rootData: {}, constData: {}, selfData: {}, tempData: {} }
+    } = {}
   ) {
     return ncformUtils.smartAnalyze(val, {
       idxChain,
@@ -443,8 +453,13 @@ const ncformUtils = {
         }
         break;
       case "function":
-        const idxChains = idxChain.split(",").filter(item => item).map(item => parseInt(item));
-        result = val(...data.map(item => item.value._value).concat([idxChains]));
+        const idxChains = idxChain
+          .split(",")
+          .filter(item => item)
+          .map(item => parseInt(item));
+        result = val(
+          ...data.map(item => item.value._value).concat([idxChains])
+        );
         break;
       default:
         result = val;
@@ -579,10 +594,10 @@ const ncformUtils = {
    * @param {*} func
    */
   traverseJSON(json, func) {
-    let newJson = json;
-    for (var i in newJson) {
+    const newJson = json;
+    for (const i in newJson) {
       newJson[i] = func.apply(this, [i, newJson[i]]);
-      if (newJson[i] !== null && typeof (newJson[i]) == "object") {
+      if (newJson[i] !== null && typeof newJson[i] === "object") {
         newJson[i] = ncformUtils.traverseJSON(newJson[i], func);
       }
     }

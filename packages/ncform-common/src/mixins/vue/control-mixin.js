@@ -4,7 +4,6 @@ import _template from "lodash-es/template";
 import ncformUtils from "../../ncform-utils";
 
 export default {
-
   autoDX: true, // 当不需要config自动支持dx表达式，可将该值设为false
 
   i18nData: {
@@ -13,14 +12,13 @@ export default {
   },
 
   created() {
-
     this.$options.lang = window.__$ncform.lang;
-    this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
+    this.$data.i18n =
+      this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
 
     if (!this.$http) {
       this.$http = this.$axios || this.axios || axios;
     }
-
   },
 
   props: {
@@ -60,7 +58,7 @@ export default {
     value: {
       type: [String, Number, Boolean, Object, Array]
     },
-  
+
     schema: {
       type: Object,
       default() {
@@ -73,51 +71,66 @@ export default {
     return {
       defaultConfig: {},
       modelVal: this.value,
-      i18n: {},
+      i18n: {}
     };
   },
 
   computed: {
     disabled() {
-      return this.globalStatus === 'preview' || this._analyzeVal(this.config.disabled);
+      return (
+        this.globalStatus === "preview" ||
+        this._analyzeVal(this.config.disabled)
+      );
     },
     readonly() {
-      if (!this.schema || !this.schema.ui || this.schema.ui.process === true || this.schema.ui.process === undefined) {
-        return this._analyzeVal(this.config.readonly)
-      } else {
-        if (this.schema && this.schema.ui && this.schema.ui.process === this.globalConst.nodeUId) {
-          return this._analyzeVal(this.config.readonly)
-        }
-        return true
+      if (
+        !this.schema ||
+        !this.schema.ui ||
+        this.schema.ui.process === true ||
+        this.schema.ui.process === undefined
+      ) {
+        return this._analyzeVal(this.config.readonly);
       }
+      if (
+        this.schema &&
+        this.schema.ui &&
+        this.schema.ui.process === this.globalConst.nodeUId
+      ) {
+        return this._analyzeVal(this.config.readonly);
+      }
+      return true;
     },
     placeholder() {
       return this._analyzeVal(this.config.placeholder);
     },
     hidden() {
-      if (!this.schema || !this.schema.ui || this.schema.ui.process === true || this.schema.ui.process === undefined) {
+      if (
+        !this.schema ||
+        !this.schema.ui ||
+        this.schema.ui.process === true ||
+        this.schema.ui.process === undefined
+      ) {
         return this._analyzeVal(this.config.hidden);
       }
-      let nodeCodeArr = this.globalConst.nodeCodeArr || []
-      if ((nodeCodeArr.includes(this.schema.ui.process) || this.schema.ui.process === this.globalConst.nodeUId)) {
-        return this._analyzeVal(this.config.hidden)
-      } else {
-        return true
+      const nodeCodeArr = this.globalConst.nodeCodeArr || [];
+      if (
+        nodeCodeArr.includes(this.schema.ui.process) ||
+        this.schema.ui.process === this.globalConst.nodeUId
+      ) {
+        return this._analyzeVal(this.config.hidden);
       }
+      return true;
     },
     mergeConfig() {
-      let newConfig = extend(
-        true,
-        {},
-        this.$data.defaultConfig,
-        this.config
-      )
-      return this.$options.autoDX ? ncformUtils.traverseJSON(newConfig, (...params) => {
-        let val = params[1];
-        if (val !== null && typeof val !== 'object')
-          return this._analyzeVal(val);
-        else return val;
-      }) : newConfig
+      const newConfig = extend(true, {}, this.$data.defaultConfig, this.config);
+      return this.$options.autoDX
+        ? ncformUtils.traverseJSON(newConfig, (...params) => {
+            const val = params[1];
+            if (val !== null && typeof val !== "object")
+              return this._analyzeVal(val);
+            return val;
+          })
+        : newConfig;
     }
   },
 
@@ -143,7 +156,11 @@ export default {
     _analyzeVal(val) {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain,
-        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
+        data: {
+          rootData: this.formData,
+          constData: this.globalConst,
+          tempData: this.tempData
+        }
       });
     },
 
@@ -156,7 +173,9 @@ export default {
     },
 
     $nclang(key, data) {
-      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
+      return Object.prototype.toString.call(data) !== "[object Object]"
+        ? this.$data.i18n[key]
+        : _template(this.$data.i18n[key])(data);
     }
   }
 };

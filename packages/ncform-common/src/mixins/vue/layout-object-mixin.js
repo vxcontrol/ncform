@@ -2,7 +2,6 @@ import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
 export default {
-
   created() {
     this.$data.collapsed = this.mergeConfig.collapsed;
   },
@@ -62,18 +61,13 @@ export default {
 
   computed: {
     mergeConfig() {
-      let newConfig = extend(
-        true,
-        {},
-        this.$data.defaultConfig,
-        this.config
-      )
+      const newConfig = extend(true, {}, this.$data.defaultConfig, this.config);
       return ncformUtils.traverseJSON(newConfig, (...params) => {
-        let val = params[1];
-        if (val !== null && typeof val !== 'object')
+        const val = params[1];
+        if (val !== null && typeof val !== "object")
           return this._analyzeVal(val);
-        else return val;
-      })
+        return val;
+      });
     }
   },
 
@@ -81,7 +75,11 @@ export default {
     _analyzeVal(val) {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain,
-        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
+        data: {
+          rootData: this.formData,
+          constData: this.globalConst,
+          tempData: this.tempData
+        }
       });
     },
     _setTempData(key, value) {
