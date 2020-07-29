@@ -1,6 +1,6 @@
 {
   "name": "@vxcontrol/ncform",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "ncform, a very nice configuration generation way to develop form ( vue, json-schema, form, generator )",
   "author": "daniel.xiao; F-loat; vxcontrol",
   "main": "dist/vueNcform.min.js",
@@ -67,12 +67,15 @@
     "src"
   ],
   "dependencies": {
-    "@vxcontrol/ncform-common": "^1.7.3",
+    "@vxcontrol/ncform-common": "^1.7.4",
     "axios": "^0.19.2",
     "extend": "^3.0.1",
     "lodash-es": "^4.17.15",
     "vue": "^2.6.11",
-    "vue-scrollto": "^2.18.1"
+    "vue-loader": "^15.2.6",
+    "vue-scrollto": "^2.18.1",
+    "webpack": "^4.44.0",
+    "webpack-merge": "^4.1.4"
   },
   "publishConfig": {
     "access": "public"

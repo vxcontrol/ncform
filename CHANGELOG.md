@@ -1,3 +1,15 @@
+# [1.7.4](https://github.com/vxcontrol/ncform/compare/v1.7.3...v1.7.4) (2020-07-29)
+
+### Bug Fixes
+
+* linting of current version code ([038481c](https://github.com/vxcontrol/ncform/commit/038481cb25364e1bcb53357dd44978f898bc59f0))
+* translated descriptions and tests title from chinese to english and fixed unit tests and webpack configs ([da96bd8](https://github.com/vxcontrol/ncform/commit/da96bd849704699a97e781e6334850b429bd44c8), [47d2079](https://github.com/vxcontrol/ncform/commit/47d2079b10dfa42f9353ceb7b098ad4cf3afd18d))
+* fixed tests for Element UI theme with loading of minimized JS instead of regular version ([9c87a11](https://github.com/vxcontrol/ncform/commit/9c87a11447d55cbee4352d8b098bf37240f9b0b8))
+
+### Features
+
+* added russian language to base controls ([8bd0024](https://github.com/vxcontrol/ncform/commit/8bd0024f5ffe86aef84689f9fb93f28fb2005f1e))
+
 # [1.7.3](https://github.com/vxcontrol/ncform/compare/v1.7.0...v1.7.3) (2020-07-28)
 
 ### Features
