@@ -332,7 +332,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(formSchema);
     assert(formSchema.properties.name.value === value.name);
   });
   it("setValueToSchema - nested object", () => {
@@ -355,7 +354,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(JSON.stringify(formSchema, null, 2));
     assert(
       formSchema.properties.name.properties.firstname.value ===
         value.name.firstname
@@ -381,7 +379,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.properties.name.value === value.name);
   });
   it("setValueToSchema - nested array of objects and then objects", () => {
@@ -410,7 +407,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(JSON.stringify(formSchema, null, 2));
     assert(
       JSON.stringify(formSchema.properties.user.value) ===
         JSON.stringify(value.user)
@@ -425,7 +421,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.value === value);
   });
   it("setValueToSchema - nested array", () => {
@@ -440,7 +435,6 @@ describe('/src/ncform-utils.js', () => {
       }
     };
     ncformUtils.setValueToSchema(value, formSchema);
-    console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.value === value);
   });
   it("setValueToSchema - non-schema object", () => {

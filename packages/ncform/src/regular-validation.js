@@ -71,7 +71,7 @@ class RegularValidation {
         if (!this.allRules[keys[i]]) {
           resolve({
             result: false,
-            errMsg: `不存在验证规则${keys[i]}`
+            errMsg: `No validation rule for ${keys[i]}`
           });
         }
 

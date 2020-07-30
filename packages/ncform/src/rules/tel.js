@@ -12,7 +12,7 @@ class TelRule extends ValidationRule {
   validateLogic(val, ruleVal) {
     if (!ruleVal) return true;
     if (typeof val !== "string") return true;
-    return /^1[3|4|5|7|8][0-9]\d{4,8}$/.test(val);
+    return /\+?[1-9]?([\ \.\-]?)\(?([0-9]{3})\)?([\ \.\-]?)([0-9]{3})([\ \.\-]?)([0-9]{4})/i.test(val);
   }
 }
 
