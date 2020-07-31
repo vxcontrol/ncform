@@ -1,3 +1,13 @@
+# [1.7.5](https://github.com/vxcontrol/ncform/compare/v1.7.4...v1.7.5) (2020-07-31)
+
+### Bug Fixes
+
+* fixed tests ([7421aa7](https://github.com/vxcontrol/ncform/commit/7421aa7843b940e7c9949efaa7109fe75eb20a2c))
+
+### Features
+
+* extend supported options for "select" control ([90a1997](https://github.com/vxcontrol/ncform/commit/90a1997c0db050a9610fcdc609a1ee52c7d16512))
+
 # [1.7.4](https://github.com/vxcontrol/ncform/compare/v1.7.3...v1.7.4) (2020-07-29)
 
 ### Bug Fixes
