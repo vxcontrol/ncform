@@ -7,6 +7,8 @@
       :size="mergeConfig.size"
       :clearable="mergeConfig.clearable"
       :multiple="mergeConfig.multiple"
+      :default-first-option="mergeConfig.defaultFirstOption"
+      :allow-create="mergeConfig.allowCreate"
       :filterable="mergeConfig.filterable"
       :remote="!isLocalSource && !mergeConfig.filterLocal"
       :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
@@ -79,6 +81,8 @@ export default {
       // 组件特有的配置属性
       defaultConfig: {
         multiple: false, // 是否多选
+        allowCreate: false, // 允许元素创建
+        defaultFirstOption: false, //默认选择第一项
         clearable: true, // 是否出现清空选项
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
