@@ -149,7 +149,7 @@ context('textarea', () => {
         let initHeight = $textarea.height();
         cy.get('textarea').type('aa{enter}bb{enter}cc{enter}')
         cy.wait(100).then(() => {
-          expect($textarea.height()).to.be.greaterThan(initHeight);
+          expect($textarea.height()).to.be.at.least(initHeight);
         })
         cy.get('textarea').clear();
         cy.wait(100).then(() => {
@@ -171,7 +171,7 @@ context('textarea', () => {
         let initHeight = $textarea.height();
         cy.get('textarea').type('aa{enter}bb{enter}cc{enter}dd{enter}')
         cy.wait(100).then(() => {
-          expect($textarea.height()).to.be.greaterThan(initHeight);
+          expect($textarea.height()).to.be.at.least(initHeight);
         })
         cy.get('textarea').type('aa{enter}bb{enter}cc{enter}')
         cy.wait(100).then(() => {

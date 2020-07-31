@@ -12,12 +12,12 @@ context('ui.preview', () => {
     let id = md5('Video preview');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('label').contains('video1').next().as('video1');
-      cy.get('@video1').find('video').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/movie.ogg');
+      cy.get('@video1').find('video').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/html/mov_bbb.ogg');
       cy.get('@video1').find('input').clear().type('http://www.runoob.com/try/demo_source/mov_bbb.mp4');
       cy.get('@video1').find('video').should('have.prop', 'src', 'http://www.runoob.com/try/demo_source/mov_bbb.mp4');
 
       cy.get('label').contains('video2').next().as('video2');
-      cy.get('@video2').find('video').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/movie.ogg');
+      cy.get('@video2').find('video').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/html/mov_bbb.ogg');
       cy.get('@video2').find('.clear').click();
       cy.get('@video2').find('input').should('have.value', '');
     })
@@ -27,12 +27,12 @@ context('ui.preview', () => {
     let id = md5('Audio preview');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('label').contains('audio1').next().as('audio1');
-      cy.get('@audio1').find('audio').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/movie.ogg');
+      cy.get('@audio1').find('audio').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/html/mov_bbb.ogg');
       cy.get('@audio1').find('input').clear().type('http://www.runoob.com/try/demo_source/mov_bbb.mp4');
       cy.get('@audio1').find('audio').should('have.prop', 'src', 'http://www.runoob.com/try/demo_source/mov_bbb.mp4');
 
       cy.get('label').contains('audio2').next().as('audio2');
-      cy.get('@audio2').find('audio').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/movie.ogg');
+      cy.get('@audio2').find('audio').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/html/mov_bbb.ogg');
       cy.get('@audio2').find('.clear').click();
       cy.get('@audio2').find('input').should('have.value', '');
     })
@@ -42,21 +42,21 @@ context('ui.preview', () => {
     let id = md5('Image preview');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('label').contains('image1').next().as('image1');
-      cy.get('@image1').find('img').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/eg_tulip.jpg').and('have.css', 'height', '200px');
+      cy.get('@image1').find('img').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/tags/img_pink_flowers.jpg').and('have.css', 'height', '200px');
       cy.get('@image1').find('input').clear().type('http://www.runoob.com/images/pulpit.jpg');
       cy.get('@image1').find('img').should('have.prop', 'src', 'http://www.runoob.com/images/pulpit.jpg');
 
       cy.get('label').contains('image2').next().as('image2');
-      cy.get('@image2').find('img').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/eg_tulip.jpg');
+      cy.get('@image2').find('img').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/tags/img_pink_flowers.jpg');
       cy.get('@image2').find('.clear').click();
       cy.get('@image2').find('input').should('have.value', '');
 
       cy.get('label').contains('image3').next().as('image3');
-      cy.get('@image3').find('img').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/eg_tulip.jpg').and('have.css', 'width', '200px');
+      cy.get('@image3').find('img').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/tags/img_pink_flowers.jpg').and('have.css', 'width', '200px');
       cy.get('@image3').find('img').parent().should('have.class', 'rounded');
 
       cy.get('label').contains('image4').next().as('image4');
-      cy.get('@image4').find('img').should('exist').and('have.prop', 'src', 'http://www.w3school.com.cn/i/eg_tulip.jpg').and('have.css', 'width', '200px');
+      cy.get('@image4').find('img').should('exist').and('have.prop', 'src', 'https://www.w3schools.com/tags/img_pink_flowers.jpg').and('have.css', 'width', '200px');
       cy.get('@image4').find('img').parent().should('have.class', 'circle');
     })
   })

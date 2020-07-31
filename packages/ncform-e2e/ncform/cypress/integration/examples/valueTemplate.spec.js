@@ -55,11 +55,13 @@ context('ValueTemplate', () => {
         cy.get('input').last().should('have.value', 'sarah');
       });
       cy.get('label').contains('test1').next().find('input').clear().type('["hi daniel", "hello sarah"]');
+      cy.wait(1500);
       cy.get('legend').contains('array1').parent().within(() => {
         cy.get('input').first().should('have.value', 'hi daniel');
         cy.get('input').last().should('have.value', 'hello sarah');
       });
       cy.get('label').contains('test1').next().find('input').clear().type('["one daniel"]');
+      cy.wait(1500);
       cy.get('legend').contains('array1').parent().within(() => {
         cy.get('input').should('have.length', 1);
         cy.get('input').first().should('have.value', 'one daniel');
@@ -72,11 +74,13 @@ context('ValueTemplate', () => {
       });
 
       cy.get('label').contains('test2').next().find('input').clear().type('[{{}"text": "hi daniel"}, {{}"text": "hello"}]');
+      cy.wait(1500);
       cy.get('legend').contains('array2').parent().within(() => {
         cy.get('input').first().should('have.value', 'hi daniel');
         cy.get('input').last().should('have.value', 'hello');
       });
       cy.get('label').contains('test2').next().find('input').clear().type('[{{}"text": "one daniel"}]');
+      cy.wait(1500);
       cy.get('legend').contains('array2').parent().within(() => {
         cy.get('input').should('have.length', 1);
         cy.get('input').first().should('have.value', 'one daniel');

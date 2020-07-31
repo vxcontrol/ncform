@@ -462,7 +462,7 @@ context('select', () => {
           expect(callCount).to.be.equal(2);
           cy.get('input')
             .eq(0)
-            .type('da');
+            .type('da', {force: true});
           cy.get('@body')
             .find('li:contains("daniel")')
             .should('be.visible');
@@ -486,7 +486,7 @@ context('select', () => {
           expect(callCount).to.be.equal(2);
           cy.get('input')
             .eq(0)
-            .type('d');
+            .type('d', {force: true});
 
           // new http request
           cy.wait('@list').then(xhr => {
@@ -513,7 +513,7 @@ context('select', () => {
 
           cy.get('@body')
             .find('li:contains("daniel"):visible:last')
-            .click();
+            .click({force: true});
           cy.get('input')
             .eq(0)
             .should('have.value', 'daniel');

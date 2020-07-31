@@ -109,11 +109,9 @@
     },
 
     watch: {
-      'schema.value.length': {
+      'schema.value': {
         handler(newVal, oldVal) {
-          if (newVal > oldVal) { // add item
-            this._supportItemsCollapse();
-          }
+          this._supportItemsCollapse();
         }
       }
     }

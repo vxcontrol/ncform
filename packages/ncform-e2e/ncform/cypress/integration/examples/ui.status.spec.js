@@ -30,12 +30,12 @@ context('ui.status', () => {
       cy.get('label').contains('name1').next().find('input').as('name1');
       cy.get('label').contains('name2').next().find('input').as('name2');
 
-      cy.get('@readonly').then($dom => expect($dom.attr('readonly')).to.be.empty);
+      cy.get('@readonly').then($dom => expect($dom.attr('readonly')).to.be.undefined);
       cy.get('@name1').then($dom => expect($dom.attr('readonly')).to.equal('readonly'));
       cy.get('@name2').then($dom => expect($dom.attr('readonly')).to.equal('readonly'));
 
       cy.get('@readonly').type('daniel');
-      cy.get('@name2').then($dom => expect($dom.attr('readonly')).to.be.empty);
+      cy.get('@name2').then($dom => expect($dom.attr('readonly')).to.be.undefined);
 
       cy.get('@readonly').clear();
       cy.get('@name2').then($dom => expect($dom.attr('readonly')).to.equal('readonly'));
