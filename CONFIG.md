@@ -29,6 +29,7 @@
         columns: 6, // Total are 12 columns. [support dx expression]
         label: '', // Label display [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
+        showIdxLabel: true, // Whether to hide the label Idx (number) after label base string (use it for array and array-tabs)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
         legend: '', // Legend content, valid when the type is object or array [support dx expression]
         showLegend: true, // Whether to display the legend.

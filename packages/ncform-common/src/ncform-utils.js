@@ -84,6 +84,7 @@ const ncformUtils = {
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
           showLabel: true,
+          showIdxLabel: fieldSchema.type === "array",
           showLegend: !!(
             ncformUtils.isNormalObjSchema(fieldSchema) ||
             ncformUtils.isNormalArrSchema(fieldSchema)

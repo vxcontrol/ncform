@@ -145,9 +145,9 @@ export default {
   },
 
   methods: {
-    _analyzeVal(val) {
+    _analyzeVal(val, idx = this.idxChain) {
       return ncformUtils.smartAnalyzeVal(val, {
-        idxChain: this.idxChain,
+        idxChain: idx,
         data: {
           rootData: this.formData,
           constData: this.globalConst,

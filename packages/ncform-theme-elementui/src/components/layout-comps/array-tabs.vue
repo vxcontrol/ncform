@@ -11,7 +11,7 @@
       <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :closable="globalStatus !== 'preview' && !disabled && (!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :name="'' + idx">
 
         <span slot="label">
-          {{_analyzeVal(dataItem.__dataSchema.ui.label) + ' ' + (idx + 1)}}
+          {{_analyzeVal(dataItem.__dataSchema.ui.label, (idxChain ? idxChain + ',' : '') + idx) + (schema.ui.showIdxLabel ? ' ' + (idx + 1) : '')}}
           <!-- 提示信息 -->
           <el-tooltip class="item" effect="dark" placement="right-start">
             <div slot="content" v-html="dataItem.__dataSchema.ui.help.content"></div>

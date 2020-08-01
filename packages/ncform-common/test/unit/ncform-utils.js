@@ -78,6 +78,9 @@ describe('/src/ncform-utils.js', () => {
         obj: {
           type: 'object'
         },
+        arr: {
+          type: 'array'
+        },
         _link: {
           type: 'HTML'
         }
@@ -85,6 +88,7 @@ describe('/src/ncform-utils.js', () => {
     };
     const newFormSchema = ncformUtils.perfectFormSchema(formSchema);
     assert.equal(newFormSchema.ui.showLabel, true);
+    assert.equal(newFormSchema.ui.showIdxLabel, false);
     assert.equal(newFormSchema.ui.showLegend, true);
     assert.equal(newFormSchema.ui.noLabelSpace, false);
     assert.deepEqual(newFormSchema.globalConfig, {
@@ -106,9 +110,16 @@ describe('/src/ncform-utils.js', () => {
     });
     assert.equal(newFormSchema.properties.name.ui.label, 'name');
     assert.equal(newFormSchema.properties.name.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.name.ui.showIdxLabel, false);
     assert.equal(newFormSchema.properties.name.ui.noLabelSpace, false);
     assert.equal(newFormSchema.properties.obj.ui.label, 'obj');
+    assert.equal(newFormSchema.properties.obj.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.obj.ui.showIdxLabel, false);
     assert.equal(newFormSchema.properties.obj.ui.showLegend, false);
+    assert.equal(newFormSchema.properties.arr.ui.label, 'arr');
+    assert.equal(newFormSchema.properties.arr.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showIdxLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showLegend, false);
     assert.equal(newFormSchema.properties._link.ui.noLabelSpace, true);
   });
 

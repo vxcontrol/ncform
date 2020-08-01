@@ -30,6 +30,7 @@
         columns: 6, // 占用列数，共12列。【支持dx表达式】
         label: '', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
+        showIdxLabel: true, // 是否在标签基字符串后隐藏标签Idx（数字）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当 widget 为 object，array 等布局时有效【支持dx表达式】
         showLegend: true, // 是否显示标题。
