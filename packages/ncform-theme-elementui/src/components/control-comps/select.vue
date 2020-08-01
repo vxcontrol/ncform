@@ -16,14 +16,32 @@
       @change="handleChange"
       @visible-change="handleVisibleChange"
     >
-      <el-option
-        v-for="item in optionsData"
-        :key="item[mergeConfig.itemValueField]"
-        :label="item[mergeConfig.itemLabelField]"
-        :value="item[mergeConfig.itemValueField]"
-      >
-        <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
-      </el-option>
+      <template v-if="mergeConfig.grouping">
+        <el-option-group
+          v-for="group in optionsData"
+          :key="group.label"
+          :label="group.label"
+        >
+          <el-option
+            v-for="item in group.options"
+            :key="item[mergeConfig.itemValueField]"
+            :label="item[mergeConfig.itemLabelField]"
+            :value="item[mergeConfig.itemValueField]"
+          >
+            <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
+          </el-option>
+        </el-option-group>
+      </template>
+      <template v-else>
+        <el-option
+          v-for="item in optionsData"
+          :key="item[mergeConfig.itemValueField]"
+          :label="item[mergeConfig.itemLabelField]"
+          :value="item[mergeConfig.itemValueField]"
+        >
+          <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
+        </el-option>
+      </template>
     </el-select>
   </div>
 </template>
@@ -81,6 +99,7 @@ export default {
       // 组件特有的配置属性
       defaultConfig: {
         multiple: false, // 是否多选
+        grouping: false, // 允许元素分组
         allowCreate: false, // 允许元素创建
         defaultFirstOption: false, //默认选择第一项
         clearable: true, // 是否出现清空选项
