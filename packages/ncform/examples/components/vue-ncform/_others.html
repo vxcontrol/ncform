@@ -12,14 +12,17 @@
       <template v-for="item in formSchemas">
         <div :data-cy="item.id" v-if="mode !== 'only' || item.only" :key="item.formName">
           <h4>[CASE] {{ item.title }}</h4>
-          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName" @submit="submit(item.formName)" @change="onChange" :is-dirty.sync="item.isFormDirty"></ncform>
+          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName"
+            @submit="submit(item.formName)" @change="onChange" :is-dirty.sync="item.isFormDirty"></ncform>
 
-          <button v-if="['v-model: external update', 'reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" @click="changeModel(item.formSchema)">
+          <button v-if="['v-model: external update', 'reset', 'is-dirty.sync'].indexOf(item.title) >= 0"
+            class="btn btn-primary" @click="changeModel(item.formSchema)">
             Updated Model
           </button>
-          <button v-if="['reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" @click="reset(item.formName)">Reset</button>
-          <button v-if="['is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" :disabled="!item.isFormDirty">Submit</button>
-
+          <button v-if="['reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary"
+            @click="reset(item.formName)">Reset</button>
+          <button v-if="['is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary"
+            :disabled="!item.isFormDirty">Submit</button>
           <hr />
         </div>
       </template>
@@ -125,6 +128,56 @@
                 }
               }
             },
+            {
+              id: md5('change paths'),
+              title: 'change paths',
+              isFormDirty: false,
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    }
+                  },
+                  names: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                    },
+                    ui: {
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
+                    }
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        firstname: {
+                          type: 'string'
+                        },
+                        lastname: {
+                          type: 'string'
+                        }
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
+                    }
+
+                  }
+                }
+              }
+            },
           ]
         },
         methods: {
@@ -137,7 +190,7 @@
           changeModel(formSchema) {
             formSchema.value = { user: { name: 'daniel' } };
           },
-          onChange({paths, itemValue, formValue, itemOldValue}) {
+          onChange({ paths, itemValue, formValue, itemOldValue }) {
             console.log('paths:', paths);
             console.log('itemValue:', itemValue);
             console.log('formValue:', JSON.stringify(formValue, null, 2));
