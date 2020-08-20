@@ -1,3 +1,10 @@
+# [1.7.6](https://github.com/vxcontrol/ncform/compare/v1.7.5...v1.7.6) (2020-08-20)
+
+### Features
+
+* added grouping elements for select control ([e9b5734](https://github.com/vxcontrol/ncform/commit/e9b5734139cf582694d2e6925031fe477a1e666b))
+* added showIdxLabel option to array and passing Idx field to dx expression for array label ([d340a50](https://github.com/vxcontrol/ncform/commit/d340a5003d387c911082d5a072d479d9b4337b6f))
+
 # [1.7.5](https://github.com/vxcontrol/ncform/compare/v1.7.4...v1.7.5) (2020-07-31)
 
 ### Bug Fixes

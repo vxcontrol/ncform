@@ -1,6 +1,6 @@
 {
   "name": "@vxcontrol/ncform-common",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "gulp-uglify": "2.0.0",
     "isparta": "^4.1.1",
     "json-loader": "0.5.4",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.1",
     "sinon": "1.17.5",
     "sinon-chai": "2.8.0",
     "webpack-stream": "^5.2.1"
