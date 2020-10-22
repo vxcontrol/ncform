@@ -1,3 +1,9 @@
+# [1.7.7](https://github.com/vxcontrol/ncform/compare/v1.7.6...v1.7.7) (2020-10-22)
+
+### Features
+
+* added resolving of reference for json schema ([5a23034](https://github.com/vxcontrol/ncform/commit/5a23034fd89e65b136365dd5af12475143d48c2a))
+
 # [1.7.6](https://github.com/vxcontrol/ncform/compare/v1.7.5...v1.7.6) (2020-08-20)
 
 ### Features
