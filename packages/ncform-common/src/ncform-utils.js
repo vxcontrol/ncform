@@ -169,7 +169,42 @@ const ncformUtils = {
       return newFieldVal;
     }
 
-    return completionField("$root", returnSchema);
+    function fixReference(root, obj = root) {
+      function getValue(p) {
+        let value = {};
+        const path = p.split("/");
+        if (path[0] === "#") {
+          value = root;
+        }
+        path.slice(1).forEach(key => {
+          value = value.hasOwnProperty(key) ? value[key] : {};
+        });
+        return value;
+      }
+    
+      for (let property in obj) {
+        if (obj.hasOwnProperty(property)) {
+          if (typeof obj[property] === "object") {
+            fixReference(root, obj[property]);
+          }
+          else {
+            if (property === "$ref" && typeof obj[property] === "string") {
+              Object.entries(getValue(obj[property]))
+                .forEach(([key, value]) => {
+                  obj[key] = value;
+                });
+              delete obj["$ref"];
+              fixReference(root, obj);
+              break;
+            }
+          }
+        }
+      }
+
+      return obj;
+    }
+
+    return fixReference(completionField("$root", returnSchema));
   },
 
   /**
