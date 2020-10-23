@@ -191,7 +191,15 @@ const ncformUtils = {
             if (property === "$ref" && typeof obj[property] === "string") {
               Object.entries(getValue(obj[property]))
                 .forEach(([key, value]) => {
-                  obj[key] = value;
+                  if (typeof obj[key] === "object" && !Array.isArray(obj[key]) &&
+                      typeof value === "object" && !Array.isArray(value)) {
+                    obj[key] = {...obj[key], ...value};
+                  } else if (Array.isArray(obj[key]) && Array.isArray(value)) {
+                    // obj[key] = obj[key].concat(value).unique();
+                    obj[key] = [...new Set([...obj[key], ...value])];
+                  } else {
+                    obj[key] = value;
+                  }
                 });
               delete obj["$ref"];
               fixReference(root, obj);
@@ -204,7 +212,7 @@ const ncformUtils = {
       return obj;
     }
 
-    return fixReference(completionField("$root", returnSchema));
+    return completionField("$root", fixReference(returnSchema));
   },
 
   /**

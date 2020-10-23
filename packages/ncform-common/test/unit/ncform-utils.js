@@ -122,6 +122,60 @@ describe('/src/ncform-utils.js', () => {
     assert.equal(newFormSchema.properties.arr.ui.showLegend, false);
     assert.equal(newFormSchema.properties._link.ui.noLabelSpace, true);
   });
+  it("perfectFormSchema - References in schema", () => {
+    const formSchema = {
+      type: 'object',
+      definitions: {
+        string: {
+          ui: {
+            label: 'my_name',
+            noLabelSpace: true
+          }
+        },
+        object: {
+          type: 'object'
+        },
+        array: {
+          type: 'array',
+          value: [345, 456]
+        }
+      },
+      properties: {
+        name: {
+          $ref: "#/definitions/string",
+          type: 'string',
+          ui: {
+            showLabel: false
+          }
+        },
+        obj: {
+          $ref: "#/definitions/object"
+        },
+        arr: {
+          $ref: "#/definitions/array",
+          value: [123, 234, 345]
+        }
+      }
+    };
+    const newFormSchema = ncformUtils.perfectFormSchema(formSchema);
+    assert.equal(newFormSchema.ui.showLabel, true);
+    assert.equal(newFormSchema.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.ui.showLegend, true);
+    assert.equal(newFormSchema.ui.noLabelSpace, false);
+    assert.equal(newFormSchema.properties.name.ui.label, 'my_name');
+    assert.equal(newFormSchema.properties.name.ui.showLabel, false);
+    assert.equal(newFormSchema.properties.name.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.properties.name.ui.noLabelSpace, true);
+    assert.equal(newFormSchema.properties.obj.ui.label, 'obj');
+    assert.equal(newFormSchema.properties.obj.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.obj.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.properties.obj.ui.showLegend, false);
+    assert.equal(newFormSchema.properties.arr.ui.label, 'arr');
+    assert.equal(newFormSchema.properties.arr.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showIdxLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showLegend, false);
+    assert.deepEqual(newFormSchema.properties.arr.value, [123, 234, 345, 456]);
+  });
 
   // --- getModelFromSchema
 
