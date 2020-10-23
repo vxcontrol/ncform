@@ -1,7 +1,7 @@
 {
   "name": "ncform-show",
   "private": true,
-  "version": "1.7.7",
+  "version": "1.7.8",
   "description": "ncform show",
   "author": "daniel.xiao",
   "keywords": [
@@ -55,9 +55,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vxcontrol/ncform": "^1.7.7",
-    "@vxcontrol/ncform-common": "^1.7.7",
-    "@vxcontrol/ncform-theme-elementui": "^1.7.7",
+    "@vxcontrol/ncform": "^1.7.8",
+    "@vxcontrol/ncform-common": "^1.7.8",
+    "@vxcontrol/ncform-theme-elementui": "^1.7.8",
     "ace-builds": "^1.2.9",
     "lodash-es": "^4.17.15",
     "vue": "^2.6.11",

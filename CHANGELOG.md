@@ -1,3 +1,11 @@
+# [1.7.8](https://github.com/vxcontrol/ncform/compare/v1.7.7...v1.7.8) (2020-10-23)
+
+### Bug Fixes
+
+* fixed of references loading sequence and added unit test case for describe reference in schema ([72eaaec](https://github.com/vxcontrol/ncform/commit/72eaaecc289fc5efd69c77e3082ae0cbbf5f4fff))
+* fixed error array paths value got by changed ([df1cd23](https://github.com/vxcontrol/ncform/commit/df1cd23f150a35c5f331a9a7d19d75dcbf9aa20c)), closes [#162](https://github.com/ncform/ncform/issues/162)
+* fixed crach when number type items in array ([e5a5e59](https://github.com/vxcontrol/ncform/commit/e5a5e597c6c54989d33eeefd309d8a9bee47228c)), closes [#150](https://github.com/ncform/ncform/issues/150)
+
 # [1.7.7](https://github.com/vxcontrol/ncform/compare/v1.7.6...v1.7.7) (2020-10-22)
 
 ### Features
