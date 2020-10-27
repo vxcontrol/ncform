@@ -176,6 +176,58 @@ describe('/src/ncform-utils.js', () => {
     assert.equal(newFormSchema.properties.arr.ui.showLegend, false);
     assert.deepEqual(newFormSchema.properties.arr.value, [123, 234, 345, 456]);
   });
+  it("perfectFormSchema - Combining in schema (allOf)", () => {
+    const formSchema = {
+      type: 'object',
+      properties: {
+        name: {
+          allOf: [{
+            type: 'string',
+            ui: {
+              showLabel: false
+            }
+          }, {
+            ui: {
+              label: 'my_name',
+              noLabelSpace: true
+            }
+          }]
+        },
+        obj: {
+          allOf: [{
+            type: 'object'
+          }, {
+          }]
+        },
+        arr: {
+          allOf: [{
+            type: 'array',
+            value: [123, 234, 345]
+          }, {
+            value: [345, 456]
+          }]
+        }
+      }
+    };
+    const newFormSchema = ncformUtils.perfectFormSchema(formSchema);
+    assert.equal(newFormSchema.ui.showLabel, true);
+    assert.equal(newFormSchema.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.ui.showLegend, true);
+    assert.equal(newFormSchema.ui.noLabelSpace, false);
+    assert.equal(newFormSchema.properties.name.ui.label, 'my_name');
+    assert.equal(newFormSchema.properties.name.ui.showLabel, false);
+    assert.equal(newFormSchema.properties.name.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.properties.name.ui.noLabelSpace, true);
+    assert.equal(newFormSchema.properties.obj.ui.label, 'obj');
+    assert.equal(newFormSchema.properties.obj.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.obj.ui.showIdxLabel, false);
+    assert.equal(newFormSchema.properties.obj.ui.showLegend, false);
+    assert.equal(newFormSchema.properties.arr.ui.label, 'arr');
+    assert.equal(newFormSchema.properties.arr.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showIdxLabel, true);
+    assert.equal(newFormSchema.properties.arr.ui.showLegend, false);
+    assert.deepEqual(newFormSchema.properties.arr.value, [123, 234, 345, 456]);
+  });
 
   // --- getModelFromSchema
 
@@ -569,7 +621,7 @@ describe('/src/ncform-utils.js', () => {
     };
     ncformUtils.setValueToSchema(value, formSchema);
     assert(formSchema.properties.name.properties.firstname.value === '');
-    assert(formSchema.properties.name.properties.age.value === undefined);
+    assert(formSchema.properties.name.properties.age.value === '');
     assert(formSchema.properties.name.properties.marry.value === false);
     assert(
       JSON.stringify(formSchema.properties.name.properties.info.value) ===
@@ -1058,10 +1110,10 @@ describe('/src/ncform-utils.js', () => {
     assert(stringDefVal === '');
 
     const numberDefVal = ncformUtils.getDefVal('number');
-    assert(numberDefVal === undefined);
+    assert(numberDefVal === '');
 
     const integerDefVal = ncformUtils.getDefVal('integer');
-    assert(integerDefVal === undefined);
+    assert(integerDefVal === '');
 
     const booleanDefVal = ncformUtils.getDefVal('boolean');
     assert(booleanDefVal === false);

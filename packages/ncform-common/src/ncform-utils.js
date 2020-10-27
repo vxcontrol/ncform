@@ -1,6 +1,9 @@
 import _get from "lodash-es/get";
 import _map from "lodash-es/map";
+import _uniq from "lodash-es/uniq";
+import _isNil from "lodash-es/isnil";
 import _kebabCase from "lodash-es/kebabCase";
+import _mergeWith from "lodash-es/mergewith";
 import extend from "extend";
 
 const ncformUtils = {
@@ -169,6 +172,17 @@ const ncformUtils = {
       return newFieldVal;
     }
 
+    function mergeSchemas(jsonSchemas) {
+      return _mergeWith({}, ...jsonSchemas, (mergedValue, newValue, key) => {
+        if (_isNil(mergedValue)) {
+          return;
+        }
+        if (Array.isArray(mergedValue)) {
+          return _uniq(mergedValue.concat(newValue)).sort();
+        }
+      });
+    }
+
     function fixReference(root, obj = root) {
       function getValue(p) {
         let value = {};
@@ -189,18 +203,11 @@ const ncformUtils = {
           }
           else {
             if (property === "$ref" && typeof obj[property] === "string") {
-              Object.entries(getValue(obj[property]))
+              Object.entries(mergeSchemas([getValue(obj[property]), obj]))
                 .forEach(([key, value]) => {
-                  if (typeof obj[key] === "object" && !Array.isArray(obj[key]) &&
-                      typeof value === "object" && !Array.isArray(value)) {
-                    obj[key] = {...obj[key], ...value};
-                  } else if (Array.isArray(obj[key]) && Array.isArray(value)) {
-                    // obj[key] = obj[key].concat(value).unique();
-                    obj[key] = [...new Set([...obj[key], ...value])];
-                  } else {
                     obj[key] = value;
                   }
-                });
+                );
               delete obj["$ref"];
               fixReference(root, obj);
               break;
@@ -212,7 +219,31 @@ const ncformUtils = {
       return obj;
     }
 
-    return completionField("$root", fixReference(returnSchema));
+    function fixCombining(root, obj = root) {
+      for (let property in obj) {
+        if (obj.hasOwnProperty(property)) {
+          if (property !== "allOf" && typeof obj[property] === "object") {
+            fixCombining(root, obj[property]);
+          }
+          else {
+            if (property === "allOf" && Array.isArray(obj[property])) {
+              fixCombining(root, obj[property]);
+              Object.entries(mergeSchemas(obj[property]))
+                .forEach(([key, value]) => {
+                    obj[key] = value;
+                  }
+                );
+              delete obj["allOf"];
+              break;
+            }
+          }
+        }
+      }
+
+      return obj;
+    }
+
+    return completionField("$root", fixCombining(fixReference(returnSchema)));
   },
 
   /**
