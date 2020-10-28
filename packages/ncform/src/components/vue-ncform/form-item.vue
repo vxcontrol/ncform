@@ -3,7 +3,7 @@
   <div :class="[(!!schema.__validationResult && !schema.__validationResult.result) ? 'invalid' : '', schema.ui.itemClass]">
 
     <!-- object 类型 -->
-    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :paths="paths" v-bind="commonAttrs">
+    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" v-model="schema.value" :schema="schema" :paths="paths" v-bind="commonAttrs">
 
       <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
         <form-item
@@ -22,7 +22,7 @@
     </component>
 
     <!-- array 类型 -->
-    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :paths="paths" v-bind="commonAttrs" class="__ncform-control">
+    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" v-model="schema.value" :schema="schema" :paths="paths" v-bind="commonAttrs" class="__ncform-control">
 
       <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
         <form-item
@@ -52,7 +52,7 @@
 
     <!-- string / number / integer / boolean 类型 -->
     <template v-else>
-      <component :is="'ncform-' + schema.ui.widget" v-model="schema.value" v-bind="commonAttrs" :schema="schema" class="__ncform-control">
+      <component :is="'ncform-' + schema.ui.widget" v-model="schema.value" :schema="schema" :paths="paths" v-bind="commonAttrs" class="__ncform-control">
       </component>
       <div class="__ncform-item-preview" v-if="schema.ui.preview && schema.value"
         :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}" >

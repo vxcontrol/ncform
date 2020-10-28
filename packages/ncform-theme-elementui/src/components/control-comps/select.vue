@@ -10,6 +10,7 @@
       :default-first-option="mergeConfig.defaultFirstOption"
       :allow-create="mergeConfig.allowCreate"
       :filterable="mergeConfig.filterable"
+      :value-key="mergeConfig.valueKey"
       :remote="!isLocalSource && !mergeConfig.filterLocal"
       :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
       :loading="loading"
@@ -18,13 +19,13 @@
     >
       <template v-if="mergeConfig.grouping">
         <el-option-group
-          v-for="group in optionsData"
-          :key="group.label"
+          v-for="(group, g) in optionsData"
+          :key="group.label + '_' + g"
           :label="group.label"
         >
           <el-option
-            v-for="item in group.options"
-            :key="item[mergeConfig.itemValueField]"
+            v-for="(item, i) in group.options"
+            :key="item[mergeConfig.itemValueField] + '_' + i"
             :label="item[mergeConfig.itemLabelField]"
             :value="item[mergeConfig.itemValueField]"
           >
@@ -34,8 +35,8 @@
       </template>
       <template v-else>
         <el-option
-          v-for="item in optionsData"
-          :key="item[mergeConfig.itemValueField]"
+          v-for="(item, i) in optionsData"
+          :key="item[mergeConfig.itemValueField] + '_' + i"
           :label="item[mergeConfig.itemLabelField]"
           :value="item[mergeConfig.itemValueField]"
         >
@@ -105,6 +106,7 @@ export default {
         clearable: true, // 是否出现清空选项
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
+        valueKey: "", // 显示对象中使用的键
         itemTemplate: "", // 显示项的模板
         size: '',
 
