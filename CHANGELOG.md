@@ -1,3 +1,13 @@
+# [1.8.0](https://github.com/vxcontrol/ncform/compare/v1.7.8...v1.8.0) (2020-10-28)
+
+### Features
+
+* added combining objects in json schema via allOf keys ([5b8a655](https://github.com/vxcontrol/ncform/commit/5b8a655551c4aa8c8da801d89379ce6d91b396b9))
+* added selfPath and $path variables to describe chain path into dx expressions to current object of schema. this is the breaking change to use JS function signature in dx expressions ([769d988](https://github.com/vxcontrol/ncform/commit/769d988937e2940af2e37b70bff82b1d3a506687))
+* changed default behaviour of adding new item into array, this will be always opened ([5bf27b3](https://github.com/vxcontrol/ncform/commit/5bf27b389061edb4c7917e5f47725f9ecc2bdc96))
+* added using of objects for 'select' ui element ([2b80c4f](https://github.com/vxcontrol/ncform/commit/2b80c4f0573efbaa6935d4467952d68d8860c556))
+* added dx expressions support to fieldPath of linked fields with the UI element ([6ab0bb0](https://github.com/vxcontrol/ncform/commit/6ab0bb0e31287046fcb4757eac3b98db5e910f8c))
+
 # [1.7.8](https://github.com/vxcontrol/ncform/compare/v1.7.7...v1.7.8) (2020-10-23)
 
 ### Bug Fixes
