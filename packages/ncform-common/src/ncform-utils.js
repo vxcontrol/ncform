@@ -391,11 +391,10 @@ const ncformUtils = {
   },
 
   /**
-   * 根据数据路径取得相应的schema
-   * @param {*} fromSchema
+   * 根据索引获取正确的path
    * @param {*} path
    */
-  getSchemaByPath(fromSchema, pathParam, idxChain) {
+  getPath(pathParam, idxChain) {
     let path = pathParam;
     if (idxChain) {
       // 处理[i]
@@ -404,6 +403,17 @@ const ncformUtils = {
         path = path.replace("[i]", `[${idx}]`);
       });
     }
+
+    return path;
+  },
+
+  /**
+   * 根据数据路径取得相应的schema
+   * @param {*} fromSchema
+   * @param {*} path
+   */
+  getSchemaByPath(fromSchema, pathParam, idxChain) {
+    let path = ncformUtils.getPath(pathParam, idxChain);
 
     const schemaPath = `properties.${path
       .replace(/\./g, ".properties.") // 对象
@@ -515,24 +525,13 @@ const ncformUtils = {
       return tempVal;
     }
 
-    const fixPath = tempVal => {
-      const brackets = tempVal.match(/\[.*?\]/g) || []; // brackets值：["[i]"]
-      brackets.forEach((bItem, idx) => {
-        if (bItem === "[i]") {
-          const bItemTemp = eval(bItem.replace(/i/g, idxChains[idx])); // bItemTemp值：[0] （假设idxChain[0] == 0）
-          tempVal = tempVal.replace(bItem, `[${bItemTemp}]`); // tempVal值：'persons[0].age'
-        }
-      });
-      return tempVal;
-    }
-
     data = data.map((
       dataItem // 套多一层是为了支持原始类型，如string, number
     ) =>
       Object.assign({}, dataItem, {
         value: {
           _value: dataItem.symbol === "$path" && typeof dataItem.value === "string" ?
-            fixPath(dataItem.value) : dataItem.value
+            ncformUtils.getPath(dataItem.value, idxChain) : dataItem.value
         }
       })
     );

@@ -245,7 +245,7 @@ export default {
 
     // 校验其它指定字段的值
     _validOtherField(fieldPath, idxChain, ruleNames) {
-      let val = _get(this.formData, fieldPath.replace("[i]", `[${idxChain}]`));
+      let val = _get(this.formData, ncformUtils.getPath(fieldPath, idxChain));
       let schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, idxChain);
       if (schema === undefined) {
         // 取不到schema说明传入的fieldPath或idxChain无效
@@ -352,19 +352,17 @@ export default {
               if (result.result && result.linkItems) {
                 // 如果校验成功，并且有linkItems，则校验关联item的指定规则
                 result.linkItems.forEach(item => {
-                  let val = _get(
-                    this.formData,
-                    ncformUtils.smartAnalyzeVal(item.fieldPath, {
-                      idxChain: this.idxChain,
-                      data: {
-                        rootData: this.formData,
-                        tempData: this.tempData,
-                        constData: this.globalConfig.constants,
-                        selfPath: this.paths
-                      }
-                    })
-                  );
-                  let schema = ncformUtils.getSchemaByPath(this.completeSchema, item.fieldPath, this.idxChain);
+                  let fieldPath = ncformUtils.smartAnalyzeVal(item.fieldPath, {
+                    idxChain: this.idxChain,
+                    data: {
+                      rootData: this.formData,
+                      tempData: this.tempData,
+                      constData: this.globalConfig.constants,
+                      selfPath: this.paths
+                    }
+                  }) || item.fieldPath;
+                  let val = _get(this.formData, ncformUtils.getPath(fieldPath, this.idxChain));
+                  let schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, this.idxChain);
                   let rules = {
                     customRule: [schema.rules.customRule[item.customRuleIdx]]
                   };
@@ -391,16 +389,25 @@ export default {
           let linkFields = this.schema.ui.linkFields;
           if (linkFields && linkFields.length > 0) {
             linkFields.forEach(item => {
-              let returnRes = this._validOtherField(item.fieldPath, this.idxChain, item.rules);
+              let fieldPath = ncformUtils.smartAnalyzeVal(item.fieldPath, {
+                idxChain: this.idxChain,
+                data: {
+                  rootData: this.formData,
+                  tempData: this.tempData,
+                  constData: this.globalConfig.constants,
+                  selfPath: this.paths
+                }
+              }) || item.fieldPath;
+              let returnRes = this._validOtherField(fieldPath, this.idxChain, item.rules);
               if (returnRes === null) {
-                if (item.fieldPath.indexOf("[i]") >= 0) {
+                if (fieldPath.indexOf("[i]") >= 0) {
                   // TODO: 这里暂时仅支持一层的[i]
-                  let arrField = item.fieldPath.match(/(.*?)\[i\]/)[1];
+                  let arrField = fieldPath.match(/(.*?)\[i\]/)[1];
                   let arrSchema = ncformUtils.getSchemaByPath(this.completeSchema, arrField);
                   let arrItemTotal = arrSchema.value.length;
                   // 校验它所有子项指定的字段
                   for (let i = 0; i < arrItemTotal; i++) {
-                    this._validOtherField(item.fieldPath, i + "", item.rules);
+                    this._validOtherField(fieldPath, i + "", item.rules);
                   }
                 }
               }
