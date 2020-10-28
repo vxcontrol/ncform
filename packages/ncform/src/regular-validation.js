@@ -12,7 +12,7 @@ class RegularValidation {
   validate(
     value,
     rules = {},
-    { formData, idxChain = "", globalConfig = {} },
+    { formData, selfPath = "", idxChain = "", globalConfig = {} },
     uniqueId = ""
   ) {
     const keys = Object.keys(rules);
@@ -40,7 +40,11 @@ class RegularValidation {
             if (
               !ncformUtils.smartAnalyzeVal(item.script, {
                 idxChain,
-                data: { rootData: formData, constData: globalConfig.constants }
+                data: {
+                  rootData: formData,
+                  constData: globalConfig.constants,
+                  selfPath: selfPath
+                }
               })
             ) {
               resolve({
@@ -81,12 +85,20 @@ class RegularValidation {
           dxRules = _cloneDeep(rules[keys[i]]);
           dxRules.value = ncformUtils.smartAnalyzeVal(rules[keys[i]].value, {
             idxChain,
-            data: { rootData: formData, constData: globalConfig.constants }
+            data: {
+              rootData: formData,
+              constData: globalConfig.constants,
+              selfPath: selfPath
+            }
           });
         } else {
           dxRules = ncformUtils.smartAnalyzeVal(rules[keys[i]], {
             idxChain,
-            data: { rootData: formData, constData: globalConfig.constants }
+            data: {
+              rootData: formData,
+              constData: globalConfig.constants,
+              selfPath: selfPath
+            }
           });
         }
 
@@ -148,11 +160,19 @@ class RegularValidation {
         (keys.indexOf("required") === -1 ||
           ncformUtils.smartAnalyzeVal(rules.required, {
             idxChain,
-            data: { rootData: formData, constData: globalConfig.constants }
+            data: {
+              rootData: formData,
+              constData: globalConfig.constants,
+              selfPath: selfPath
+            }
           }) === false ||
           ncformUtils.smartAnalyzeVal(_get(rules, "required.value"), {
             idxChain,
-            data: { rootData: formData, constData: globalConfig.constants }
+            data: {
+              rootData: formData,
+              constData: globalConfig.constants,
+              selfPath: selfPath
+            }
           }) === false) &&
         !ncformUtils.notEmptyVal(value)
       ) {

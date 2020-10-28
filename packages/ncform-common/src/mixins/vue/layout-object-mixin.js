@@ -72,13 +72,14 @@ export default {
   },
 
   methods: {
-    _analyzeVal(val) {
+    _analyzeVal(val, key = "") {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain,
         data: {
           rootData: this.formData,
           constData: this.globalConst,
-          tempData: this.tempData
+          tempData: this.tempData,
+          selfPath: this.paths + (key !== "" ? `.${key}` : "")
         }
       });
     },

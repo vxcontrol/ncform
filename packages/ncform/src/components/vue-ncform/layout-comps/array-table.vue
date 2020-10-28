@@ -131,7 +131,14 @@
 
     methods: {
       analyzeItemVal(val, idxChain) {
-        return ncformUtils.smartAnalyzeVal(val, { idxChain: idxChain + '', data: { rootData: this.formData, constData: this.globalConst } });
+        return ncformUtils.smartAnalyzeVal(val, {
+          idxChain: idxChain + '',
+          data: {
+            rootData: this.formData,
+            constData: this.globalConst,
+            selfPath: this.paths + `[${idxChain}]`
+          }
+        });
       },
 
       showRequiredFlag(requiredConfig) {

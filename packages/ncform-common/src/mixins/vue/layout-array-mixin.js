@@ -151,7 +151,8 @@ export default {
         data: {
           rootData: this.formData,
           constData: this.globalConst,
-          tempData: this.tempData
+          tempData: this.tempData,
+          selfPath: this.paths + `[${(idx || "").split(",").slice(-1)[0]}]`
         }
       });
     },

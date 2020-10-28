@@ -260,12 +260,13 @@ globalConfig: {
 
 > dx expressions can also be replaced with `function` :
 
-function(formData, constData, selfData, tempData, itemIdxChain) { ... }
+function(formData, constData, selfData, tempData, selfPath, itemIdxChain) { ... }
 
 - formData: corresponds to `{{$root}}`. Form data
 - constData: corresponds to `{{$const}}`. Constant data in global configuration
 - selfData: corresponds to `{{$self}}`. Used only for `ui.preview.value`, which refers to its own value
 - tempData: corresponds to `{{$temp}}`. Temporarily stored value
+- selfPath: corresponds to `{{$path}}`. To use self object type the construction into dx: `__get({{$root}}, {{$path}})`
 - itemIdxChain: useful only for array items, refers to the index path of the current array, such as [1, 0]
 
 Some common examples are as follows:
@@ -277,7 +278,7 @@ disabled: function(formData) {
 }
 
 // array item
-disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+disabled: function(formData, constData, selfData, tempData, selfPath, itemIdxChain) {
   const [ i ] = itemIdxChain;
   return formData.persons[i].age < 18;
 }

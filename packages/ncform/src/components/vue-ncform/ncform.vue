@@ -1,7 +1,13 @@
 <template>
 <div class="ncform">
   <form v-if="!isSchemaChanging" novalidate :class="dataFormSchema.globalConfig.style.formCls">
-    <form-item :schema="dataFormSchema" :form-data="formData" :temp-data="tempData" :global-config="dataFormSchema.globalConfig" :complete-schema="dataFormSchema" :form-name="name"></form-item>
+    <form-item
+      :schema="dataFormSchema"
+      :form-data="formData"
+      :temp-data="tempData"
+      :global-config="dataFormSchema.globalConfig"
+      :complete-schema="dataFormSchema"
+      :form-name="name"></form-item>
     <!-- button这样处理是为了在Mac下的Safari能否正常使用回车键触发表单的submit事件 -->
     <button @click.prevent="submit()" type="submit" style="position: absolute; left: -100px; visibility: hidden"></button>
   </form>
@@ -201,7 +207,8 @@ export default {
         idxChain: __idxChain,
         data: {
           rootData: this.$data.formData,
-          constData: this.dataFormSchema.globalConfig.constants
+          constData: this.dataFormSchema.globalConfig.constants,
+          selfPath: __dataPath === undefined ? '' : __dataPath
         }
       });
       if (isRemove)
@@ -217,7 +224,8 @@ export default {
             idxChain: __idxChain,
             data: {
               rootData: this.$data.formData,
-              constData: this.dataFormSchema.globalConfig.constants
+              constData: this.dataFormSchema.globalConfig.constants,
+              selfPath: __dataPath === undefined ? '' : __dataPath
             }
           });
         } else {
@@ -244,6 +252,7 @@ export default {
           window.__$ncform.__ncformRegularValidation
             .validate(schema.value, schema.rules, {
               formData: this.$data.formData,
+              selfPath: __dataPath,
               idxChain: __idxChain,
               globalConfig: this.dataFormSchema.globalConfig
             })

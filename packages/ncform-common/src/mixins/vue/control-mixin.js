@@ -56,6 +56,11 @@ export default {
       default: ""
     },
 
+    paths: {
+      type: String,
+      default: ""
+    },
+
     value: {
       type: [String, Number, Boolean, Object, Array]
     },
@@ -160,7 +165,8 @@ export default {
         data: {
           rootData: this.formData,
           constData: this.globalConst,
-          tempData: this.tempData
+          tempData: this.tempData,
+          selfPath: this.paths
         }
       });
     },

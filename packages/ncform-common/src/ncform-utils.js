@@ -417,7 +417,7 @@ const ncformUtils = {
    * @param {*} val
    * @param {*}
    *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
-   *   data: {rootData: 代表$root的值, constData: 代表$const的值, selfData: 代表$self的值, tempData: 代表$tempData的值 }
+   *   data: {rootData: 代表$root的值, constData: 代表$const的值, selfData: 代表$self的值, tempData: 代表$tempData的值, selfPath: 代表$path的值 }
    * 规则：
    * 1. 普通值直接返回
    * 2. 函数类型返回执行后的值
@@ -427,7 +427,7 @@ const ncformUtils = {
     val,
     {
       idxChain = "",
-      data = { rootData: {}, constData: {}, selfData: {}, tempData: {} }
+      data = { rootData: {}, constData: {}, selfData: {}, tempData: {}, selfPath: "" }
     } = {}
   ) {
     return ncformUtils.smartAnalyze(val, {
@@ -448,6 +448,10 @@ const ncformUtils = {
         {
           symbol: "$temp",
           value: data.tempData
+        },
+        {
+          symbol: "$path",
+          value: data.selfPath
         }
       ]
     });
@@ -468,15 +472,68 @@ const ncformUtils = {
    */
   smartAnalyze(val, { idxChain = "", data = [], expPrefix = "dx:" } = {}) {
     const valType = typeof val;
+    const idxChains = idxChain.split(",");
     let result;
     const __get = _get;
     const __map = _map;
+
+    const getSpec = tempVal => {
+      data.forEach((dataItem, idx) => {
+        if (tempVal.indexOf("[e]") >= 0) {
+          tempVal = tempVal.replace(
+            new RegExp(`\\{{\\s*\\${dataItem.symbol}(.*)}}`),
+            `__map(data[${idx}].value._value, '$1')`
+          );
+        } else {
+          tempVal = tempVal.replace(
+            new RegExp(`\\{{\\s*\\${dataItem.symbol}(\\.?.*)}}`),
+            `__get(data[${idx}].value, '_value$1')`
+          ); // tempVal值：__get(_formData, 'persons[i].age')
+        }
+      });
+      return tempVal;
+    }
+
+    const fixSpec = tempVal => {
+      const brackets = tempVal.match(/\[.*?\]/g) || []; // brackets值：["[i]"]
+      brackets.forEach((bItem, idx) => {
+        // bItem值："[i]"
+        if (bItem === "[e]") {
+          // e表达式 [e]
+          // before _map(data[0].value, '[e].id')
+          tempVal = tempVal
+            .replace(", '", "")
+            .replace(/\[e\]\.{0,1}/, ", '")
+            .replace(", ''", "");
+          // after __map(data[0].value, 'id')
+        } else {
+          // i表达式或者索引数字 [i] or [0]
+          const bItemTemp = eval(bItem.replace(/i/g, idxChains[idx - 1])); // bItemTemp值：[0] （假设idxChain[0] == 0）
+          tempVal = tempVal.replace(bItem, `[${bItemTemp}]`); // tempVal值：__get(_formData, 'persons[0].age')
+        }
+      });
+      return tempVal;
+    }
+
+    const fixPath = tempVal => {
+      const brackets = tempVal.match(/\[.*?\]/g) || []; // brackets值：["[i]"]
+      brackets.forEach((bItem, idx) => {
+        if (bItem === "[i]") {
+          const bItemTemp = eval(bItem.replace(/i/g, idxChains[idx])); // bItemTemp值：[0] （假设idxChain[0] == 0）
+          tempVal = tempVal.replace(bItem, `[${bItemTemp}]`); // tempVal值：'persons[0].age'
+        }
+      });
+      return tempVal;
+    }
 
     data = data.map((
       dataItem // 套多一层是为了支持原始类型，如string, number
     ) =>
       Object.assign({}, dataItem, {
-        value: { _value: dataItem.value }
+        value: {
+          _value: dataItem.symbol === "$path" && typeof dataItem.value === "string" ?
+            fixPath(dataItem.value) : dataItem.value
+        }
       })
     );
 
@@ -484,43 +541,11 @@ const ncformUtils = {
       case "string":
         if (val.indexOf(expPrefix) === 0) {
           // TODO daniel: 这里的替换可能需要再完善一下，可能会出错
-          const idxChains = idxChain.split(",");
           // 假设val为：dx: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
           const matchs = val.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
           matchs.forEach(mItem => {
             // mItem值："{{$root.persons[i].age}}"
-            let tempVal = mItem;
-            data.forEach((dataItem, idx) => {
-              if (tempVal.indexOf("[e]") >= 0) {
-                tempVal = tempVal.replace(
-                  new RegExp(`\\{{\\s*\\${dataItem.symbol}(.*)}}`),
-                  `__map(data[${idx}].value._value, '$1')`
-                );
-              } else {
-                tempVal = tempVal.replace(
-                  new RegExp(`\\{{\\s*\\${dataItem.symbol}(\\.?.*)}}`),
-                  `__get(data[${idx}].value, '_value$1')`
-                ); // tempVal值：__get(_formData, 'persons[i].age')
-              }
-            });
-            const brackets = tempVal.match(/\[.*?\]/g) || []; // brackets值：["[i]"]
-            brackets.forEach((bItem, idx) => {
-              // bItem值："[i]"
-              if (bItem === "[e]") {
-                // e表达式 [e]
-                // before _map(data[0].value, '[e].id')
-                tempVal = tempVal
-                  .replace(", '", "")
-                  .replace(/\[e\]\.{0,1}/, ", '")
-                  .replace(", ''", "");
-                // after __map(data[0].value, 'id')
-              } else {
-                // i表达式或者索引数字 [i] or [0]
-                const bItemTemp = eval(bItem.replace(/i/g, idxChains[idx - 1])); // bItemTemp值：[0] （假设idxChain[0] == 0）
-                tempVal = tempVal.replace(bItem, `[${bItemTemp}]`); // tempVal值：__get(_formData, 'persons[0].age')
-              }
-            });
-            val = val.replace(mItem, tempVal);
+            val = val.replace(mItem, fixSpec(getSpec(mItem)));
           });
           result = eval(val);
         } else {
@@ -528,12 +553,10 @@ const ncformUtils = {
         }
         break;
       case "function":
-        const idxChains = idxChain
-          .split(",")
-          .filter(item => item)
-          .map(item => parseInt(item));
         result = val(
-          ...data.map(item => item.value._value).concat([idxChains])
+          ...data.map(item => item.value._value).concat([idxChains
+            .filter(item => item)
+            .map(item => parseInt(item))])
         );
         break;
       default:

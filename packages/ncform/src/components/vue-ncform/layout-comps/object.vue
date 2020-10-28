@@ -6,15 +6,15 @@
     <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="form-row v-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
-          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns, field) || 12)]"
+          :style="{display: _analyzeVal(fieldSchema.ui.hidden, field) ? 'none' : ''}"
           class="form-group">
         <template>
             <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
               <!-- 必填标识 -->
-              <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
+              <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
 
-              {{_analyzeVal(fieldSchema.ui.label)}}
+              {{_analyzeVal(fieldSchema.ui.label, field)}}
 
               <!--  提示信息 -->
               <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
@@ -23,7 +23,7 @@
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
+            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description, field)">
             </small>
 
         </template>
@@ -34,14 +34,14 @@
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="form-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
-          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns, field) || 12)]"
+          :style="{display: _analyzeVal(fieldSchema.ui.hidden, field) ? 'none' : ''}"
           class="form-group row">
         <template>
           <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
             <!-- 必填标识 -->
-            <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{_analyzeVal(fieldSchema.ui.label)}}
+            <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
+            {{_analyzeVal(fieldSchema.ui.label, field)}}
 
             <!--  提示信息 -->
             <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
@@ -51,7 +51,7 @@
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
+            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description, field)">
             </small>
           </div>
         </template>
@@ -112,7 +112,7 @@
         const { properties } = this.schema
         return Object.keys(properties).reduce((result, curkey) => {
           const curval = properties[curkey]
-          const remove = this._analyzeVal(curval.ui.remove)
+          const remove = this._analyzeVal(curval.ui.remove, curkey)
 
           if (!remove) {
             result[curkey] = curval

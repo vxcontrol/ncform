@@ -887,11 +887,22 @@ describe('/src/ncform-utils.js', () => {
     assert(result === true);
   });
 
+  it("smartAnalyzeVal - function get path", () => {
+    const rootData = { name: 'daniel', sign: '!' };
+    const sayHi = 'hi';
+
+    const val = function(formData, constData, selfData, tempData, selfPath, itemIdxChain) {
+      return `${sayHi} ${formData.name}${formData[selfPath]}` === 'hi daniel!';
+    };
+    const result = ncformUtils.smartAnalyzeVal(val, { data: { rootData, selfPath: "sign" } });
+    assert(result === true);
+  });
+
   it("smartAnalyzeVal - function value array item", () => {
     let rootData = { users: [{ name: 'daniel' }, { name: 'sarah' }] };
     const sayHi = 'hi';
 
-    let val = function(formData, constData, selfData, tempData, itemIdxChain) {
+    let val = function(formData, constData, selfData, tempData, selfPath, itemIdxChain) {
       return `${sayHi} ${formData.users[itemIdxChain[0]].name}` === 'hi sarah';
     };
     let result = ncformUtils.smartAnalyzeVal(val, {
@@ -904,13 +915,22 @@ describe('/src/ncform-utils.js', () => {
       users: [{ address: [{ name: 'beijing' }, { name: 'shanghai' }] }]
     };
 
-    val = function(formData, constData, selfData, tempData, itemIdxChain) {
+    val = function(formData, constData, selfData, tempData, selfPath, itemIdxChain) {
       const [i, j] = itemIdxChain;
       return `${sayHi} ${formData.users[i].address[j].name}` === 'hi shanghai';
     };
     result = ncformUtils.smartAnalyzeVal(val, {
       idxChain: '0,1',
       data: { rootData }
+    });
+    assert(result === true);
+
+    val = function(formData, constData, selfData, tempData, selfPath, itemIdxChain) {
+      return `${selfPath}` === 'users[0].address[1].name';
+    };
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '0,1',
+      data: { rootData, selfPath: "users[i].address[i].name" }
     });
     assert(result === true);
   });
@@ -950,6 +970,20 @@ describe('/src/ncform-utils.js', () => {
       data: { selfData: 'hello daniel' }
     });
     assert(result === 'hello daniel');
+
+    val = 'dx: {{$path}}';
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '0',
+      data: { selfPath: 'persons[i].age' }
+    });
+    assert(result === 'persons[0].age');
+
+    val = 'dx: __get({{$root}}, {{$path}})';
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '1',
+      data: { rootData, selfPath: 'persons[i].age' }
+    });
+    assert(result === 20);
   });
 
   it("smartAnalyzeVal - special string nested array", () => {
@@ -957,10 +991,24 @@ describe('/src/ncform-utils.js', () => {
       persons: [[{ age: 12 }, { age: 18 }], [{ age: 50 }, { age: 80 }]]
     };
 
-    const val = 'dx: {{$root.persons[i][i].age}} === 50';
-    const result = ncformUtils.smartAnalyzeVal(val, {
+    let val = 'dx: {{$root.persons[i][i].age}} === 50';
+    let result = ncformUtils.smartAnalyzeVal(val, {
       idxChain: '1,0',
       data: { rootData }
+    });
+    assert(result === true);
+
+    val = 'dx: __get({{$root}}, {{$path}}) === 50';
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '1,0',
+      data: { rootData, selfPath: 'persons[i][i].age' }
+    });
+    assert(result === true);
+
+    val = 'dx: __get({{$root}}, {{$path}}) === 18';
+    result = ncformUtils.smartAnalyzeVal(val, {
+      idxChain: '0,1',
+      data: { rootData, selfPath: 'persons[i][i].age' }
     });
     assert(result === true);
   });

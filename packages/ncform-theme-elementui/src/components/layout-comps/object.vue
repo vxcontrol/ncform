@@ -10,15 +10,15 @@
 
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
-          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: hidden(fieldSchema) ? 'none' : ''}"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns, field) || 12) * 2 || 24)]"
+          :style="{display: hidden(fieldSchema, field) ? 'none' : ''}"
           class="el-col el-form-item">
 
         <template>
             <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label">
               <!-- 必填标识 -->
-              <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-              {{_analyzeVal(fieldSchema.ui.label)}}
+              <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
+              {{_analyzeVal(fieldSchema.ui.label, field)}}
               <!-- 提示信息 -->
               <el-tooltip v-if="fieldSchema.ui.help.show === true" class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
                 <div slot="content" v-html="fieldSchema.ui.help.content"></div>
@@ -31,7 +31,7 @@
             </div>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
+            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description, field)">
             </small>
 
         </template>
@@ -43,14 +43,14 @@
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
-          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: hidden(fieldSchema) ? 'none' : ''}"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns, field) || 12) * 2 || 24)]"
+          :style="{display: hidden(fieldSchema, field) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
           <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
             <!-- 必填标识 -->
-            <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{_analyzeVal(fieldSchema.ui.label)}}
+            <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
+            {{_analyzeVal(fieldSchema.ui.label, field)}}
             <!-- 提示信息 -->
             <el-tooltip class="item" effect="dark" placement="right-start">
               <div slot="content" v-html="fieldSchema.ui.help.content"></div>
@@ -61,7 +61,7 @@
           <div class="el-form-item__content" :style="{'margin-left': (fieldSchema.ui.noLabelSpace) ? '0px' : mergeConfig.labelWidth}">
             <slot :name="field"></slot>
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
+            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description, field)">
             </small>
           </div>
         </template>
@@ -179,7 +179,7 @@ export default {
       const { properties } = this.schema
       return Object.keys(properties).reduce((result, curkey) => {
         const curval = properties[curkey]
-        const remove = this._analyzeVal(curval.ui.remove)
+        const remove = this._analyzeVal(curval.ui.remove, curkey)
 
         if (remove) {
           const fullkey = paths ? paths + '.' + curkey : curkey
@@ -196,13 +196,13 @@ export default {
     legendEnable(fieldSchema) {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     },
-    hidden(fieldSchema) {
+    hidden(fieldSchema, field) {
       if ( !fieldSchema || fieldSchema.ui.process === true || fieldSchema.ui.process === undefined ) {
-        return this._analyzeVal(fieldSchema.ui.hidden);
+        return this._analyzeVal(fieldSchema.ui.hidden, field);
       }
       let nodeCodeArr = this.globalConst.nodeCodeArr || []
       if ((nodeCodeArr.includes(fieldSchema.ui.process) || fieldSchema.ui.process === this.globalConst.nodeUId)) {
-        return this._analyzeVal(fieldSchema.ui.hidden)
+        return this._analyzeVal(fieldSchema.ui.hidden, field)
       } else {
         return true
       }
