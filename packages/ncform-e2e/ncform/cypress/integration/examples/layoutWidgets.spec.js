@@ -81,6 +81,9 @@ context('Layout widgets', () => {
       cy.get('@userLegend').click();
       cy.get('@userLegend').parent().children('div').should('be.visible');
 
+      cy.get('@userLegend').parent().find('input').should('be.visible');
+      cy.get('@userLegend').parent().find('button').contains('fold').click();
+
       cy.get('@userLegend').parent().find('input').should('not.be.visible');
       cy.get('@userLegend').parent().find('button').contains('Expand').click();
       cy.get('@userLegend').parent().find('input').should('be.visible');

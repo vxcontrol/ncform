@@ -173,14 +173,19 @@ export default {
 
     addItem(idxParam) {
       let idx = idxParam;
+      let isNew = false;
 
       if (idx === undefined) {
         this.schema.value.push(ncformUtils.getDefVal(this.schema.items.type));
         idx = this.schema.value.length - 1;
+        isNew = true;
       }
 
       if (!this.schema.value[idx].__dataSchema) {
         const __dataSchema = _cloneDeep(this.schema.items);
+        if (isNew) {
+          this.$set(__dataSchema, '_expand', true);
+        }
         ncformUtils.setValueToSchema(
           this.schema.value[idx],
           __dataSchema,

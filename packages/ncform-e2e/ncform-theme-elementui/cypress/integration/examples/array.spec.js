@@ -92,13 +92,10 @@ context('Array', () => {
           cy.get('legend').next().should('be.visible');
 
           cy.get('button').contains('Add Item').click();
-          cy.get('input').should('not.be.visible');
-          cy.get('button').find('.el-icon-arrow-up').click()
           cy.get('input').should('be.visible');
           cy.get('input').its('length').should('equal', 1);
 
           cy.get('button').contains('Add Item').click();
-          cy.get('button').find('.el-icon-arrow-up:visible').click()
           cy.get('input').its('length').should('equal', 2);
 
           cy.get('input').eq(0).type('daniel')
