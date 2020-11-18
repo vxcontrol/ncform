@@ -15,7 +15,7 @@
           class="el-col el-form-item">
 
         <template>
-            <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label">
+            <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label" :title="_analyzeVal(fieldSchema.ui.label)">
               <!-- 必填标识 -->
               <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
               {{_analyzeVal(fieldSchema.ui.label, field)}}
@@ -47,7 +47,7 @@
           :style="{display: hidden(fieldSchema, field) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
-          <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
+          <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label" :title="_analyzeVal(fieldSchema.ui.label)">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required, field) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value, field) === true)" class="text-danger">*</i>
             {{_analyzeVal(fieldSchema.ui.label, field)}}
