@@ -182,12 +182,13 @@
             {
               id: md5('$ncformGetValue api'),
               title: '$ncformGetValue api',
-              formName: 'form_' + Math.random(),
+              formName: 'form_' + md5('$ncformGetValue api'),
               formSchema: {
                 type: 'object',
                 properties: {
                   showField: {
                     type: 'string',
+                    value: '1'
                   },
                   hiddenField: {
                     type: 'string',
@@ -199,7 +200,8 @@
                     type: 'object',
                     properties: {
                       show: {
-                        type: 'string'
+                        type: 'string',
+                        value: '1'
                       },
                       hide: {
                         type: 'string',
@@ -215,7 +217,8 @@
                       type: 'object',
                       properties: {
                         show: {
-                          type: 'string'
+                          type: 'string',
+                          value: '1'
                         },
                         hide: {
                           type: 'string',
@@ -224,7 +227,8 @@
                           },
                         }
                       }
-                    }
+                    },
+                    value: [{show: '1', hidden: ''}]
                   }
                 },
                 globalConfig: {
