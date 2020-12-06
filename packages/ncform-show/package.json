@@ -55,6 +55,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@ncform/nc-array-import": "^0.0.2",
     "@vxcontrol/ncform": "^1.9.2",
     "@vxcontrol/ncform-common": "^1.9.2",
     "@vxcontrol/ncform-theme-elementui": "^1.9.2",
