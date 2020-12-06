@@ -107,6 +107,17 @@ module.exports = {
 
     Vue.prototype.$ncformAllWidgets = () => window.__$ncform.__ncformComponents;
 
+    Vue.prototype.$ncformGetValue = function(formName) {
+      formName = formName || "_ncformDefaultName";
+      const vm = window.__$ncform.__ncFormsGlobalList[formName];
+
+      if (!vm) {
+        return {};
+      }
+
+      return vm.getValue();
+    }
+
     Vue.component("ncform", ncform);
   }
 };
