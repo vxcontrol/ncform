@@ -255,8 +255,8 @@
             console.log('itemOldValue', itemOldValue);
           },
           getValue(formName) {
-            const value = this.$ncformGetValue(formName);
-            console.log('form value:', value)
+            const value = this.$ncformGetValue(formName, {ignoreHiddenField: true});
+            console.log('form value:', value, JSON.stringify(value))
           },
         }
       });
