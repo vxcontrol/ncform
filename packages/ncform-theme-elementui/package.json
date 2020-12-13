@@ -64,6 +64,7 @@
     "@vxcontrol/ncform-common": "^1.9.2",
     "element-ui": "^2.13.2",
     "lodash-es": "^4.17.15",
+    "sortablejs": "^1.12.0",
     "vue": "^2.6.11",
     "vue-loader": "^15.2.6",
     "webpack": "^4.44.0",
