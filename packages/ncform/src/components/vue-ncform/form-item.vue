@@ -173,8 +173,7 @@ export default {
       _id: Math.random()
         .toString(36)
         .substring(2),
-      // 用于保存控件旧值
-      itemValue: null //this.schema.value
+      itemValue: this.schema.value
     };
   },
 
