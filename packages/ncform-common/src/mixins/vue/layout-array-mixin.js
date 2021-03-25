@@ -176,7 +176,11 @@ export default {
       let isNew = false;
 
       if (idx === undefined) {
-        this.schema.value.push(ncformUtils.getDefVal(this.schema.items.type));
+        let items = this.schema.items
+        if (items === undefined) {
+          items = {type: "string"}
+        }
+        this.schema.value.push(ncformUtils.getDefVal(items.type));
         idx = this.schema.value.length - 1;
         isNew = true;
       }
