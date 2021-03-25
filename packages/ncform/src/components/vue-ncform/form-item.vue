@@ -173,7 +173,7 @@ export default {
       _id: Math.random()
         .toString(36)
         .substring(2),
-      itemValue: this.schema.value
+      itemValue: null //this.schema.value
     };
   },
 
@@ -314,15 +314,13 @@ export default {
 
         // 对比控件改变前后的值，判断是否需要对其进行校验。
         if (changed) {
-          if (!ncformUtils.isNormalObjSchema(newVal)) { // 叶子结点
-            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
-            formVM.$emit('change', {
-              paths: this.paths,
-              itemValue: this.schema.value,
-              formValue: this.formData,
-              itemOldValue: this.$data.itemValue
-            })
-          }
+          const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+          formVM.$emit('change', {
+            paths: this.paths,
+            itemValue: this.schema.value,
+            formValue: this.formData,
+            itemOldValue: this.$data.itemValue
+          })
 
           if (ncformUtils.isNormalArrSchema(newVal)) {
             this.$data.itemValue = ncformUtils.getModelFromSchema(newVal);
