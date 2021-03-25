@@ -1,6 +1,6 @@
 {
   "name": "@vxcontrol/ncform-common",
-  "version": "1.8.0",
+  "version": "1.9.2",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "assert": "^1.5.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "extend": "^3.0.2",
     "lodash-es": "^4.17.15",
     "power-assert": "^1.6.1"

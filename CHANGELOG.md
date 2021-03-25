@@ -1,3 +1,9 @@
+# [1.9.2](https://github.com/vxcontrol/ncform/compare/v1.8.0...v1.9.2) (2021-03-25)
+
+### Bug Fixes
+
+* fixed of emitting change event ([c634b87](https://github.com/vxcontrol/ncform/commit/c634b87e9f35c0fc99f783c1452f0587ccd47f2f))
+
 # [1.8.0](https://github.com/vxcontrol/ncform/compare/v1.7.8...v1.8.0) (2020-10-28)
 
 ### Features
