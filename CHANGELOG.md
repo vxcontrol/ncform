@@ -1,3 +1,21 @@
+## [1.10.0](https://github.com/ncform/ncform/compare/v1.9.2...v1.10.0) (2021-03-25)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed when tab name is too long ([7eda795](https://github.com/vxcontrol/ncform/commit/7eda795e0eb0e88d27a06609b41dd5c8b3e2fbc3))
+* **input:** fixes base ncform input _processModelVal with type number or integer and 0 value. ([81f5d51](https://github.com/vxcontrol/ncform/commit/81f5d5105080af1454354711ecce1f5a7dab6064))
+* **ncform:** wrong code ([ccdfc96](https://github.com/vxcontrol/ncform/commit/ccdfc96db485d2eaa6d91d260880c780d3cdda1b))
+
+### Features
+
+* **ncform-show:** add ext components demo ([c0478ef](https://github.com/vxcontrol/ncform/commit/c0478ef06bec5ebdf40f2d74517d4eb0b90ce6d8))
+* **ncform-theme-elementui:** array-tabs support draggable switch array position ([b52330e](https://github.com/vxcontrol/ncform/commit/b52330ed9cbcf661ea702543888a67e65e1f8697))
+* **playground:** added nc-array-import demo ([759efe6](https://github.com/vxcontrol/ncform/commit/759efe694641c405dc2f040e0755e3a935a9706b))
+* **ncform:** Add $ncformGetValue api ([0842c5c](https://github.com/vxcontrol/ncform/commit/0842c5c0ca597e630dd173d99e2a9f2e519ee67a)), closes [#55](https://github.com/ncform/ncform/issues/55)
+* **ncform:** change $ncformGetValue api params; rm globalConfig.ignoreFieldValueWhenHidden config ([42493a4](https://github.com/vxcontrol/ncform/commit/42493a41092778b0cc43347e426bdf448b7cc477)), closes [#55](https://github.com/ncform/ncform/issues/55)
+* **ncform-theme-elementui:** add title attribute to label ([9c6ea48](https://github.com/vxcontrol/ncform/commit/9c6ea4898c3a0b033b91ee9682248449530abf2f))
+
+
 # [1.9.2](https://github.com/vxcontrol/ncform/compare/v1.8.0...v1.9.2) (2021-03-25)
 
 ### Bug Fixes
@@ -14,7 +32,7 @@
 * added using of objects for 'select' ui element ([2b80c4f](https://github.com/vxcontrol/ncform/commit/2b80c4f0573efbaa6935d4467952d68d8860c556))
 * added dx expressions support to fieldPath of linked fields with the UI element ([6ab0bb0](https://github.com/vxcontrol/ncform/commit/6ab0bb0e31287046fcb4757eac3b98db5e910f8c))
 
-# [1.7.8](https://github.com/vxcontrol/ncform/compare/v1.7.7...v1.7.8) (2020-10-23)
+## [1.7.8](https://github.com/vxcontrol/ncform/compare/v1.7.7...v1.7.8) (2020-10-23)
 
 ### Bug Fixes
 
@@ -22,20 +40,20 @@
 * fixed error array paths value got by changed ([df1cd23](https://github.com/vxcontrol/ncform/commit/df1cd23f150a35c5f331a9a7d19d75dcbf9aa20c)), closes [#162](https://github.com/ncform/ncform/issues/162)
 * fixed crach when number type items in array ([e5a5e59](https://github.com/vxcontrol/ncform/commit/e5a5e597c6c54989d33eeefd309d8a9bee47228c)), closes [#150](https://github.com/ncform/ncform/issues/150)
 
-# [1.7.7](https://github.com/vxcontrol/ncform/compare/v1.7.6...v1.7.7) (2020-10-22)
+## [1.7.7](https://github.com/vxcontrol/ncform/compare/v1.7.6...v1.7.7) (2020-10-22)
 
 ### Features
 
 * added resolving of reference for json schema ([5a23034](https://github.com/vxcontrol/ncform/commit/5a23034fd89e65b136365dd5af12475143d48c2a))
 
-# [1.7.6](https://github.com/vxcontrol/ncform/compare/v1.7.5...v1.7.6) (2020-08-20)
+## [1.7.6](https://github.com/vxcontrol/ncform/compare/v1.7.5...v1.7.6) (2020-08-20)
 
 ### Features
 
 * added grouping elements for select control ([e9b5734](https://github.com/vxcontrol/ncform/commit/e9b5734139cf582694d2e6925031fe477a1e666b))
 * added showIdxLabel option to array and passing Idx field to dx expression for array label ([d340a50](https://github.com/vxcontrol/ncform/commit/d340a5003d387c911082d5a072d479d9b4337b6f))
 
-# [1.7.5](https://github.com/vxcontrol/ncform/compare/v1.7.4...v1.7.5) (2020-07-31)
+## [1.7.5](https://github.com/vxcontrol/ncform/compare/v1.7.4...v1.7.5) (2020-07-31)
 
 ### Bug Fixes
 
@@ -45,7 +63,7 @@
 
 * extend supported options for "select" control ([90a1997](https://github.com/vxcontrol/ncform/commit/90a1997c0db050a9610fcdc609a1ee52c7d16512))
 
-# [1.7.4](https://github.com/vxcontrol/ncform/compare/v1.7.3...v1.7.4) (2020-07-29)
+## [1.7.4](https://github.com/vxcontrol/ncform/compare/v1.7.3...v1.7.4) (2020-07-29)
 
 ### Bug Fixes
 
@@ -57,7 +75,7 @@
 
 * added russian language to base controls ([8bd0024](https://github.com/vxcontrol/ncform/commit/8bd0024f5ffe86aef84689f9fb93f28fb2005f1e))
 
-# [1.7.3](https://github.com/vxcontrol/ncform/compare/v1.7.0...v1.7.3) (2020-07-28)
+## [1.7.3](https://github.com/vxcontrol/ncform/compare/v1.7.0...v1.7.3) (2020-07-28)
 
 ### Features
 
