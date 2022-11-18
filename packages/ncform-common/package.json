@@ -1,6 +1,6 @@
 {
   "name": "@vxcontrol/ncform-common",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
