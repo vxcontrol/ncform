@@ -1,9 +1,9 @@
 import _get from "lodash-es/get";
 import _map from "lodash-es/map";
 import _uniq from "lodash-es/uniq";
-import _isNil from "lodash-es/isnil";
+import _isNil from "lodash-es/isNil";
 import _kebabCase from "lodash-es/kebabCase";
-import _mergeWith from "lodash-es/mergewith";
+import _mergeWith from "lodash-es/mergeWith";
 import extend from "extend";
 
 const ncformUtils = {
@@ -195,7 +195,7 @@ const ncformUtils = {
         });
         return value;
       }
-    
+
       for (let property in obj) {
         if (obj.hasOwnProperty(property)) {
           if (typeof obj[property] === "object") {

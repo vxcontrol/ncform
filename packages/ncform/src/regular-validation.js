@@ -55,7 +55,7 @@ class RegularValidation {
           });
 
           if (i < keys.length - 1) {
-            resolve(nextValidate(i + 1));
+            return resolve(nextValidate(i + 1));
           } else {
             resolve({
               result: true,
